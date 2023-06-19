@@ -189,7 +189,7 @@ If you use the code or results from this tutorial, please cite the tutorial in t
 }
 ```
 
-Please, also cite the qlora project on which our work is built on.
+Please, also cite the [artidoro/qlora](https://github.com/artidoro/qlora) project on which our work is built on.
 ```
 @article{dettmers2023qlora,
   title={QLoRA: Efficient Finetuning of Quantized LLMs},
