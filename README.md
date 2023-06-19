@@ -209,7 +209,7 @@ _Please open a Pull Request._
 - Add dialogue state information to the dataloader and predict dialogue state instead of the words of the next response.🍇🍇🍇🍇🍇.
 - Clean the code 🍇
 
-### Share your pretrained model with the world
+### Upload Your Model to Hugging Face Hub🤗 
 
 1. Check the [documentation](https://huggingface.co/docs/hub/models-uploading) and setup an account on Hugging Face if you don't have it already.
 2. Create an user token and authenticate yourself in a command line. See the [quickstart](https://huggingface.co/docs/huggingface_hub/quick-start) for details. 
