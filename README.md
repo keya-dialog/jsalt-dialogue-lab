@@ -151,7 +151,7 @@ _Please open a Pull Request._
 - Clean the code 🍇
 
 ## 💡 Up for a challenge? What is the minimal experiment to add?💡
-_Below is a conversation starter list related to the topic of [clustering dialogues](https://github.com/keya-dialog/jsalt-dialogue-lab). _
+_Below is a conversation starter list related to the topic of [clustering dialogues](https://github.com/keya-dialog/jsalt-dialogue-lab)._
 
 - Evaluate Encoder-Decoder models, e.g., Flan-T5. Which architecture is better? [Up for debate/experiments.](https://twitter.com/ShayneRedford/status/1668720485285199872?t=f3I3FS2VZ9Woq7GuyOeosg&s=19). 🤷
 - How would you use the embeddings for evaluation?
