@@ -12,7 +12,7 @@ The QLoRa implementation from `huggingface/peft` library will allow us to finetu
  
  We prepared for you a series of tasks. A ready-to-use solution accompanies each task.
  The solutions are intentionally hidden, so you have the chance to try to work on the task on your own.
-We are interested in how you use the code so submit the answers via PRs or otherwise.
+We are interested in how you use the code, so submit the answers via PRs or otherwise.
 Pick your rewards 🍇!
 
 ## Environment setup
@@ -42,13 +42,13 @@ TODO
 
 </details>
 
-**Questions**
+**Task 1: Questions**
 - How to run this script on the JSALT cluster? 🍇🍇🍇🍇
 - What is your iteration speed for the training with the default values? 🍇
 - What is your iteration speed for the inference speed with the default values? 🍇
 - What machine and CUDA version do you have? 🍇🍇
 
-**Answers**
+**Task 1: Results**
 Feel free to fill in partial information, e.g., if you do not know your CUDA version just write '-'.
 
 <details>
@@ -64,13 +64,13 @@ Run the whole notebook and write down which GPU you were assigned and how much m
 The first dummy training should take around 20 minutes.
 The script downloads a small pretrained model and the MultiWoz dataset from HuggingFace.
 
-### Questions
+### Task 2: Questions
 - How to run this script on the JSALT cluster? 🍇🍇🍇🍇
 - What is your iteration speed for the training with the default values? 🍇
 - What is your iteration speed for the inference speed with the default values? 🍇
 - What machine and CUDA version do you have? 🍇🍇
 
-### Results 
+### Task 2: Results 
 Feel free to fill in partial information, e.g., if you do not know your CUDA version, just write '-'.
 
 <details>
@@ -92,13 +92,13 @@ TODO
 Play with parameters like `top_k`, `temperature`, `max_new_tokens, `penalty_alpha`, etc.
 Investigate [different decoding strategies](https://huggingface.co/docs/transformers/generation_strategies#contrastive-search).
 
-### Questions
+### Task 3: Questions
 - What is the highest `batch_size` you can use for decoding with otherwise default values? 🍇
 - What is the longest reply you can force the model to generate with `batch_size`? 🍇🍇 
 - How can you force the code to behave deterministically when having the same dialogue history and already fixed random seed? 🍇🍇🍇
 - Best bleu, success, inform, richness score without fine tuning?
 
-### Results
+### Task 3: Results
 <details>
 | LLM model |  Decoding params |  Bleu  |   Success | Inform |  Richness |
 | ----------|------------------|--------|-----------|--------|-----------|
@@ -109,12 +109,12 @@ Investigate [different decoding strategies](https://huggingface.co/docs/transfor
 
 ## 💪 Finetune LLAMA with QLora
 
-### Questions
+### Task 4: Questions
 - What LoRa modules work best? `attention`, `ffn`, `regexp_keys|values`, ...? 🍇🍇🍇🍇🍇
 - For the default parameters, what is the best number of training steps?🍇🍇🍇
 - What is the best learning rate and number of training steps?🍇🍇🍇
 
-### Results
+### Task 4: Results
 
 <details>
 | LLM model |  Training params |  Bleu  |   Success | Inform |  Richness |
@@ -132,19 +132,22 @@ Try also to scale the models' size, e.g., `EleutherAI/pythia-12b` instead `Eleut
 Note that the `pythia-70m`` model is excellent for debugging.
 Try also models trained on different datasets `OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5`.
 
-### Questions
+### Task5: Questions
 - Do zero-shot models perform better as the number of parameters grows? For which metrics? 
   - Report results with `huggyllama/llama*` or `EleutherAI/pythia*` checkpoints. 🍇🍇
   - For other models, try at least three different sizes for the same model.  🍇🍇🍇
 - What is the largest model you were able to finetune? 🍇
 
-**Please, insert the answers into the results in the table above for results with different decoding strategies.**
+**Please, insert the answers into Task 3: Results table.**
 
 
 ## ✅︎ Bored? Improve the code! ✅︎
-- Add the possibility to add "instruction" prompt before dialogue history🍇🍇🍇
+
+_Please open a Pull Request._
+
+- Add the possibility to add an "instruction" prompt before dialogue history🍇🍇🍇
 - Implement Evaluation callback to evaluate regularly during training.🍇🍇🍇
-- Train from scratch using `full_finetune` and [reinitilizing the weights](https://github.com/J4VORSKY/JSALT2023-MT-lab/blob/main/solutions/task_6.py#L26) with reasonable hyperparameters.🍇🍇🍇🍇
+- Train from scratch using `full_finetune` and reinitializing the weights](https://github.com/J4VORSKY/JSALT2023-MT-lab/blob/main/solutions/task_6.py#L26) with reasonable hyperparameters.🍇🍇🍇🍇
 - Clean the code 🍇
 
 ## 💡 Up for a challenge? What is the minimal experiment to add?💡
@@ -165,10 +168,10 @@ _Below is a conversation starter list related to the topic of [clustering dialog
 
 ## 👏 Contributing
 
-If you have implemented a new feature, found a bug or want to fix a typo, please submit a pull request.🙏 
+If you have implemented a new feature, found a bug, or want to fix a typo, please submit a pull request.🙏 
 
-### Contact
-[Ondřej Plátek](opla.cz), [(UFAL, Charles University, Prague)](https://ufal.mff.cuni.cz/ondrej-platek)) <br/>
+In other cases, feel free to reach us too:<br/>
+[Ondřej Plátek](opla.cz), [(UFAL, Charles University, Prague)](https://ufal.mff.cuni.cz/ondrej-platek) <br/>
 [Santosh Kesiraju](https://www.fit.vut.cz/person/kesiraju/.cs), [(FIT, VUT, Brno)](https://www.fit.vut.cz/person/kesiraju/) <br/>
 [Petr Schwarz](https://www.fit.vut.cz/person/schwarzp/.en), [(FIT, VUT, Brno)](https://www.fit.vut.cz/person/schwarzp/) <br/>
 
