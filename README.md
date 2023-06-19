@@ -48,15 +48,18 @@ conda activate ./env
 - How to run this script on the JSALT cluster? 🍇🍇🍇🍇
 - What is your iteration speed for the training with the default values? 🍇
 - What is your iteration speed for the inference speed with the default values? 🍇
-- What machine and CUDA version do you have? 🍇🍇
+- What machine and CUDA version do you have? 🍇
+- How to run this script on the JSALT cluster? Contributions are welcome! 🍇🍇🍇🍇
 
 **Task 1: Results**
-Feel free to fill in partial information, e.g., if you do not know your CUDA version just write '-'.
+Feel free to fill in partial information, e.g., if you do not know your CUDA version, just write '-'.
 
 <details>
-| GPU model |  CUDA   |  train [it/s]  | infer [it/s] |
-| ----------|---------|----------------|--------------|
-|   waiting |  for    |    your        |  numbers     |
+
+|GPU model |  CUDA   |  train [it/s]  | infer [it/s] |
+|----------|---------|----------------|--------------|
+|  waiting |  for    |    your        |  numbers     |
+
 </details>
 
 ####  Google Colab
@@ -66,20 +69,15 @@ Run the whole notebook and write down which GPU you were assigned and how much m
 The first dummy training should take around 20 minutes.
 The script downloads a small pretrained model and the MultiWoz dataset from HuggingFace.
 
-### Task 2: Questions
+### Task 1: Questions
 - What is your iteration speed for the training with the default values? 🍇
 - What is your iteration speed for the inference speed with the default values? 🍇
 - What machine and CUDA version do you have? 🍇🍇
-- How to run this script on the JSALT cluster? Contributions are welcome! 🍇🍇🍇🍇
+- Can you get free machine with a GPU RAM larger than 16GB e.g. on Kaggle? 🍇🍇🍇🍇
 
-### Task 2: Results 
-Feel free to fill in partial information, e.g., if you do not know your CUDA version, just write '-'.
+**Please fill the `Task 1: Results` in the section for running on cluster. In the column `GPU model` prefix the GPU type with `GC`.**
 
-<details>
-| GPU model |  CUDA   |  train [it/s]  | infer [it/s] |
-| ----------|---------|----------------|--------------|
-|   waiting |  for    |    your        |  numbers     |
-</details>
+
 
 
 
@@ -132,9 +130,11 @@ Investigate [different decoding strategies](https://huggingface.co/docs/transfor
 
 ### Task 3: Results
 <details>
-| LLM model |  Decoding params |  Bleu  |   Success | Inform |  Richness |
-| ----------|------------------|--------|-----------|--------|-----------|
-|   waiting |  for             |   your |  numbers  | again  |           |
+
+|LLM model |  Decoding params |  Bleu  |   Success | Inform |  Richness |
+|----------|------------------|--------|-----------|--------|-----------|
+|  waiting |  for             |   your |  numbers  | again  |           |
+
 </details>
 
 
@@ -149,9 +149,11 @@ Investigate [different decoding strategies](https://huggingface.co/docs/transfor
 ### Task 4: Results
 
 <details>
-| LLM model |  Training params |  Bleu  |   Success | Inform |  Richness |
-| ----------|------------------|--------|-----------|--------|-----------|
-|   waiting |  for             |   your |  numbers  | again  |           |
+
+|LLM model |  Training params |  Bleu  |   Success | Inform |  Richness |
+|----------|------------------|--------|-----------|--------|-----------|
+|  waiting |  for             |   your |  numbers  | again  |           |
+
 </details>
 
 
