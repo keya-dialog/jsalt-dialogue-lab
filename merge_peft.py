@@ -4,7 +4,7 @@ Uses code from:
  - https://github.com/artidoro/qlora/blob/d1765faa571a5c856bac34f02535544ce19d7b81/merge_peft.py
  - https://github.com/eugenepentland/landmark-attention-qlora/blob/main/llama/merge_peft.py
 Usage: python merge_peft.py [-h] [--base_model_name_or_path BASE_MODEL_NAME_OR_PATH] [--peft_model_path PEFT_MODEL_PATH] [--output_dir OUTPUT_DIR] [--device DEVICE]
-                               [--push_to_hub]
+                               [--push_to_hub HUB_USERNAME/HUB_REPO_NAME ] 
 
 """
 import torch
@@ -22,7 +22,7 @@ def get_args():
     parser.add_argument("--peft_model_path", type=str)
     parser.add_argument("--output_dir", type=str)
     parser.add_argument("--device", type=str, default="auto")
-    parser.add_argument("--push_to_hub", action="store_true")
+    parser.add_argument("--push_to_hub", type=str, default=None)
 
     return parser.parse_args()
 
@@ -65,6 +65,13 @@ def main():
         model.save_pretrained(f"{args.output_dir}")
         tokenizer.save_pretrained(f"{args.output_dir}")
         logger.info(f"Model saved to {args.output_dir}")
+
+        if args.push_to_hub:
+            assert args.output_dir
+            from huggingface_hub import HfApi
+
+            api = HfApi()
+            api.upload_folder(repo_id=args.push_to_hub, folder_path=args.output_dir)
 
     except Exception as e:
         logger.exception("An error occurred:")

@@ -155,7 +155,7 @@ Finally! Let us train the LoRa weights!
 ```bash
 ./scripts/finetune_multiwoz22_conditional_mlm.sh huggyllama/llama-7b
 ```
-- However, you may want to start small. So also explore small models `EleutherAI/pythia-70m`, set number of training steps to much lower number, etc.
+- However, you may want to start small; Explore small models like `EleutherAI/pythia-70m`, set number of training steps to much lower number, etc.
 - Warning: see how checkpoint works. Adjust `save_steps` so you will have at least some checkpoint after training.
 
 </details>
@@ -208,6 +208,23 @@ _Please open a Pull Request._
 - Add `span_info` to the dataloader and tag named entities.🍇🍇🍇🍇.
 - Add dialogue state information to the dataloader and predict dialogue state instead of the words of the next response.🍇🍇🍇🍇🍇.
 - Clean the code 🍇
+
+### Share your pretrained model with the world
+
+1. Check the [documentation](https://huggingface.co/docs/hub/models-uploading) and setup an account on Hugging Face if you don't have it already.
+2. Create an user token and authenticate yourself in a command line. See the [quickstart](https://huggingface.co/docs/huggingface_hub/quick-start) for details. 
+3. Create a repository on the huggingface.
+4. See `./merge_peft.py` script which will merge your weights to the base model so it could be used as regular transformer again. Finally use it with `--push_to_hub` option.🎉
+
+```
+# tested on GPU with this command
+python merge_peft.py \
+  --base_model_name_or_path EleutherAI/pythia-70m \
+  --peft_model_path output/EleutherAI/pythia-70m_1687207221_1159787/checkpoint-4/ \
+  --device cuda \
+  --push_to_hub oplatek/pythia-70m-multi_woz_v22 \
+  --output_dir some_local_outdir
+```
 
 ## 💡 Up for a challenge? What is the minimal experiment to add?💡
 _Below is a conversation starter list related to the topic of [clustering dialogues](https://github.com/keya-dialog/jsalt-dialogue-lab)._
