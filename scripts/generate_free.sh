@@ -1,6 +1,6 @@
 #!/bin/bash
 set -euo pipefail
-source setup_env.sh
+source ./scripts/setup_env.sh
 
 # model_name_or_path="EleutherAI/pythia-12b"
 # model_name_or_path="EleutherAI/pythia-70m"

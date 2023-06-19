@@ -7,7 +7,7 @@
 # avg tokens per turn     13.18
 # --> avg dialogue has ~ 200 words
 set -euo pipefail
-source setup_env.sh
+source ./scripts/setup_env.sh
 
 
 if [[ $1 = "debug" ]] ; then

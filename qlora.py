@@ -916,7 +916,7 @@ def train():
                     print(f"{k.ljust(15)}{v}")
                 print("")
 
-        with open(os.path.join(args.output_dir, "results.json", "w") as f:
+        with open(os.path.join(args.output_dir, "results.json", "w")) as f:
             json.dump(results, f)
 
     if args.do_train or args.do_eval or args.do_predict:

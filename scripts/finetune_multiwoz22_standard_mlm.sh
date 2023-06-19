@@ -4,7 +4,7 @@
 # avg tokens per turn     13.18
 # --> avg dialogue has ~ 200 words
 set -euo pipefail
-source setup_env.sh
+source ./scripts/setup_env.sh
 
 if [[ $1 = "debug" ]] ; then
   printf "\n\nWARNING: You are in a debugging mode for testing the script. Using a small model, few steps, etc.\n\n\n"
