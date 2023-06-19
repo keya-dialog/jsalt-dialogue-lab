@@ -1,16 +1,18 @@
 #!/bin/bash
-# USAGE: <script> [debug]
+# USAGE: <script> <debug|huggyllama/llama-7b|OTHER_MODEL_NAME>
 #
 #
 # based on https://aclanthology.org/D18-1547.pdf Table 1
 # avg turns per dialogues 13.68
 # avg tokens per turn     13.18
 # --> avg dialogue has ~ 200 words
-set -euo pipefail
+# set -euo pipefail
 source ./scripts/setup_env.sh
+# model_name_or_path=huggyllama/llama-7b 
+model_name_or_path="$1"
 
 
-if [[ $1 = "debug" ]] ; then
+if [[ "$model_name_or_path" = "debug" ]] ; then
   printf "\n\nWARNING: You are in a debugging mode for testing the script. Using a small model, few steps, etc.\n\n\n"
   max_steps=4
   gradient_accumulation_steps=2
@@ -28,8 +30,6 @@ else
   save_steps=500
   dataloader_num_workers=4
   max_eval_samples=1000
-  model_name_or_path="huggyllama/llama-7b"
-  # model_name_or_path="$1"  # uncomment if you want to provide your model on command line
 fi
 
 $PYTHON \
@@ -78,11 +78,3 @@ $PYTHON \
     --weight_decay 0.0 \
     --seed 0 \
     --group_by_length false
-
-    # Commented out options needs to at the end
-    # without group_by_length it will be less efficient
-    # but 1) I do not get how it affects the training if batch_size is 1
-    #     2) without it learns first, second, third, etc turns  together  
-    # --group_by_length \
-    # --do_mmlu_eval \
-
