@@ -141,17 +141,20 @@ Try also models trained on different datasets `OpenAssistant/oasst-sft-4-pythia-
 **Please, insert the answers into the results in the table above for results with different decoding strategies.**
 
 
-## ✅︎ What next? Fix known TODOs ✅︎
+## ✅︎ Bored? Improve the code! ✅︎
 - Add the possibility to add "instruction" prompt before dialogue history🍇🍇🍇
 - Implement Evaluation callback to evaluate regularly during training.🍇🍇🍇
 - Train from scratch using `full_finetune` and [reinitilizing the weights](https://github.com/J4VORSKY/JSALT2023-MT-lab/blob/main/solutions/task_6.py#L26) with reasonable hyperparameters.🍇🍇🍇🍇
 - Clean the code 🍇
 
-## 💡What next? Experiments?Research Ideas?💡
-- Evaluate Encoder-Decoder models, e.g. Flan-T5. Which architecture is better? There is a lot of [confusion](https://twitter.com/ShayneRedford/status/1668720485285199872?t=f3I3FS2VZ9Woq7GuyOeosg&s=19). 🤷
+## 💡 Up for a challenge? What is the minimal experiment to add?💡
+__Below is a conversation starter list related to the lab. Take it with a grain of salt.__
+
+- Evaluate Encoder-Decoder models, e.g., Flan-T5. Which architecture is better? [Up for debate/experiments.](https://twitter.com/ShayneRedford/status/1668720485285199872?t=f3I3FS2VZ9Woq7GuyOeosg&s=19). 🤷
 - How would you use the embeddings for evaluation?
 - Do you use conversational models? How would you like to evaluate them?
-- Can you recommend us some spoken task-oriented datasets? We know about:
+- What should be the first experiment for multimodal setup with audio/speech and text?
+- Can you recommend some spoken task-oriented datasets? We know about:
     - [Let's go](https://github.com/DialRC/LetsGoDataset)
     - [SpokenWOZ](https://spokenwoz.github.io/SpokenWOZ-github.io/) 
     - [Ryan speech](http://mohammadmahoor.com/ryanspeech-request-form/)
@@ -165,14 +168,13 @@ Try also models trained on different datasets `OpenAssistant/oasst-sft-4-pythia-
 If you have implemented a new feature, found a bug or want to fix a typo, please submit a pull request.🙏 
 
 ### Contact
-- [Ondřej Plátek](opla.cz), [(UFAL, Charles University, Prague)](https://ufal.mff.cuni.cz/ondrej-platek))
-- [Santosh Kesiraju](https://www.fit.vut.cz/person/kesiraju/.cs), [(FIT, VUT, Brno)](https://www.fit.vut.cz/person/kesiraju/)
-- [Petr Schwarz](https://www.fit.vut.cz/person/schwarzp/.en), [(FIT, VUT, Brno)](https://www.fit.vut.cz/person/schwarzp/)
+[Ondřej Plátek](opla.cz), [(UFAL, Charles University, Prague)](https://ufal.mff.cuni.cz/ondrej-platek)) <br/>
+[Santosh Kesiraju](https://www.fit.vut.cz/person/kesiraju/.cs), [(FIT, VUT, Brno)](https://www.fit.vut.cz/person/kesiraju/) <br/>
+[Petr Schwarz](https://www.fit.vut.cz/person/schwarzp/.en), [(FIT, VUT, Brno)](https://www.fit.vut.cz/person/schwarzp/) <br/>
 
 ## 💭 Citation
-
+If you use the code or results from this tutorial, please cite the tutorial in the following manner:
 ```
-If you use the code or results from this tutorial please cite the tutorial in the following manner:
 @article{oplatek2023qlora-multiwoz,
   title={Investigating Masked Language Model and Instruction finetuning of LLMs using QLoRa for Task-Oriented Dialogue Models},
   author={Plátek, Ondřej and Kesiraju, Santosh and Schwarz, Petr},
@@ -182,8 +184,10 @@ If you use the code or results from this tutorial please cite the tutorial in th
   commit = {todo}
   year={2023}
 }
+```
 
-Please, also cite the project on which our work is built on:
+Please, also cite the qlora project on which our work is built on.
+```
 @article{dettmers2023qlora,
   title={QLoRA: Efficient Finetuning of Quantized LLMs},
   author={Dettmers, Tim and Pagnoni, Artidoro and Holtzman, Ari and Zettlemoyer, Luke},
