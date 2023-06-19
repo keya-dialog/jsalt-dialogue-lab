@@ -82,7 +82,7 @@ The script downloads a small pretrained model and the MultiWoz dataset from Hugg
 
 
 ## 🚀 Evaluating pretrained model
-Let us start by comparing an untuned LLM (LLAMA) and an already fined-tuned LLAMA which I fine-tuned for you. (You will finetune your adapter/LoRa weights in the next task.) 
+Let us start by comparing an untuned LLM (LLAMA) and an already fined-tuned `oplatek/llama-7b-todo-multi-woz` which I fine-tuned for you. (You will finetune your adapter/LoRa weights in the next task.) 
 
 <details>
 
@@ -122,7 +122,7 @@ cp ./scripts/generate_prompted.sh ./scripts/pp.sh  # prompted_pretrained
 ```
 
 - Note that setting dataloader_num_workers to `0` is good for debugging. The dataloader runs in the main python thread. However, it is good to use more CPUs per 1 GPU if you are not debugging. 
-- Explore the options and `qlora.py` especially the [Generation arguments](ttps://huggingface.co/docs/transformers/main_classes/text_generation). You can easily add them to command line.
+- Explore the options and `qlora.py` especially the [Generation arguments](ttps://huggingface.co/docs/transformers/main_classes/text_generation). You can easily add them to the command line.
 
 </details>
 
@@ -131,7 +131,7 @@ Investigate [different decoding strategies](https://huggingface.co/docs/transfor
 
 ### Task 3: Questions
 - What is the highest `batch_size` you can use for decoding with otherwise default values? 🍇
-- What is the longest reply you can force the model to generate with `batch_size`? 🍇🍇 
+- What is the longest reply you can force the model to generate with default values? 🍇🍇 
 - How can you force the code to behave deterministically when having the same dialogue history and already fixed random seed? 🍇🍇🍇
 - Best bleu, success, inform, richness score without fine tuning?
 
@@ -147,11 +147,27 @@ Investigate [different decoding strategies](https://huggingface.co/docs/transfor
 
 
 ## 💪 Finetune LLAMA with QLora
+Finally! Let us train the LoRa weights!
+
+<details>
+- Easy:)
+
+```bash
+./scripts/finetune_multiwoz22_conditional_mlm.sh huggyllama/llama-7b
+```
+- However, you may want to start small. So also explore small models `EleutherAI/pythia-70m`, set number of training steps to much lower number, etc.
+- Warning: see how checkpoint works. Adjust `save_steps` so you will have at least some checkpoint after training.
+
+</details>
 
 ### Task 4: Questions
-- What LoRa modules work best? `attention`, `ffn`, `regexp_keys|values`, ...? 🍇🍇🍇🍇🍇
-- For the default parameters, what is the best number of training steps?🍇🍇🍇
+- What LoRa modules work best? `attention`, `ffn`, `regexp_keys|values`, ...? 🍇🍇🍇
+- For the default parameters, what is the best number of training steps?🍇🍇
 - What is the best learning rate and number of training steps?🍇🍇🍇
+- Can you implement prompting to generate the conversation of certain length?🍇🍇🍇🍇🍇
+  - Hint: I would start with `multi_woz_v22_dialogs` format as used in `finetune_multiwoz22_standard_mlm.sh`.
+  - The `multi_woz_v22_turns` format always "prompts" the model with dialogue history ending with `...\nbot>` telling the model to reply as a bot.
+  - The `multi_woz_v22_turns` format is used in `scripts/finetune_multiwoz22_conditional_mlm.sh`
 
 ### Task 4: Results
 
