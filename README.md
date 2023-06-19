@@ -42,6 +42,21 @@ TODO
 
 </details>
 
+**Questions**
+- How to run this script on the JSALT cluster? 🍇🍇🍇🍇
+- What is your iteration speed for the training with the default values? 🍇
+- What is your iteration speed for the inference speed with the default values? 🍇
+- What machine and CUDA version do you have? 🍇🍇
+
+**Answers**
+Feel free to fill in partial information, e.g., if you do not know your CUDA version just write '-'.
+
+<details>
+| GPU model |  CUDA   |  train [it/s]  | infer [it/s] |
+| ----------|---------|----------------|--------------|
+|   waiting |  for    |    your        |  numbers     |
+</details>
+
 ####  Google Colab
 
 Open the [Google Colab](TODO).
