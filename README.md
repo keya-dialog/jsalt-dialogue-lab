@@ -4,10 +4,10 @@ We will use the MultiWOZ 2.2[1](https://arxiv.org/pdf/1810.00278.pdf)[2](https:/
 The QLoRa implementation from `huggingface/peft` library will allow us to finetune large pretrained Large Langauge Models (LLMS) e.g.  LLAMA 🦙 and Falcon, on relatively small GPUs in Google Colab Notebook or on your cluster.
 
 **What will you learn?**
-- How to finetune large language model (LLM)💡 using [QLoRa](https://huggingface.co/blog/4bit-transformers-bitsandbytes)
+- How to finetune large language model (LLM) using [QLoRa](https://huggingface.co/blog/4bit-transformers-bitsandbytes)💡 
 - How to finetune parameters for [decoding/generation](https://huggingface.co/docs/transformers/main_classes/text_generation) with HuggingFace LLMs 🤗
-- Get familiar with a typical TOD textual dataset MultiWoz[1](https://arxiv.org/pdf/1810.00278.pdf)[2](https://aclanthology.org/2020.nlp4convai-1.13/)🧙 .
-- How to evaluate task-oriented dialogues (TOD) using [standardize scripts](https://github.com/Tomiinek/MultiWOZ_Evaluation)
+- Get familiar with a typical TOD textual dataset MultiWoz[[1,](https://arxiv.org/pdf/1810.00278.pdf)[ 2]](https://aclanthology.org/2020.nlp4convai-1.13/)🧙 .
+- How to evaluate task-oriented dialogues (TOD) using [standardize scripts](https://github.com/Tomiinek/MultiWOZ_Evaluation).
 
  
  We prepared for you a series of tasks. A ready-to-use solution accompanies each task.
@@ -21,17 +21,13 @@ We prepared a `qlora.py` main python script and several bash launch scripts whic
 The same functionality is demonstrated in a [Google Colab notebook](TODO).
 The Google Colab is arguably more straightforward to set up but harder to work with.
 
-### Task 0
-
-Set up your environment.
-
 #### Running on a GPU machine/cluster
 If you have a machine with a recent GPU with 16GB of memory, we recommend creating a conda environment 
 and installing the complete list of dependencies specified in `environment.yml`.
 
 <details>
-bash
-```
+
+```bash
 # Have a look at the environment.yml
 # The QLoRa finetuning requires cutting-edge libraries versions
 conda env create --prefix ./env -f environment.yml  # grab a coffee 
@@ -43,20 +39,7 @@ conda activate ./env
 # It should trigger downloading a small pretrained model and the MultiWoz dataset from HuggingFace.
 TODO
 ```
-</details>
 
-**Questions**
-- How to run this script on the JSALT cluster? 🍇🍇🍇🍇
-- What is your iteration speed for the training with the default values? 🍇
-- What is your iteration speed for the inference speed with the default values? 🍇
-- What machine and CUDA version do you have? 🍇🍇
-
-**Answers**
-Feel free to fill in partial information e.g. if you do not know your CUDA version just write '-'.
-<details>
-| GPU model |  CUDA   |  train [it/s]  | infer [it/s] |
-| ----------|---------|----------------|--------------|
-|   waiting |  for    |    your        |  numbers     |
 </details>
 
 ####  Google Colab
@@ -66,8 +49,24 @@ Run the whole notebook and write down which GPU you were assigned and how much m
 The first dummy training should take around 20 minutes.
 The script downloads a small pretrained model and the MultiWoz dataset from HuggingFace.
 
+### Questions
+- How to run this script on the JSALT cluster? 🍇🍇🍇🍇
+- What is your iteration speed for the training with the default values? 🍇
+- What is your iteration speed for the inference speed with the default values? 🍇
+- What machine and CUDA version do you have? 🍇🍇
 
-### Evaluating pretrained model
+### Results 
+Feel free to fill in partial information, e.g., if you do not know your CUDA version, just write '-'.
+
+<details>
+| GPU model |  CUDA   |  train [it/s]  | infer [it/s] |
+| ----------|---------|----------------|--------------|
+|   waiting |  for    |    your        |  numbers     |
+</details>
+
+
+
+## 🚀 Evaluating pretrained model
 Let us start by comparing an untuned LLM (LLAMA) and an already fined-tuned LLAMA model using the functionality from the next section.
 
 
@@ -78,13 +77,13 @@ TODO
 Play with parameters like `top_k`, `temperature`, `max_new_tokens, `penalty_alpha`, etc.
 Investigate [different decoding strategies](https://huggingface.co/docs/transformers/generation_strategies#contrastive-search).
 
-**Question**
+### Questions
 - What is the highest `batch_size` you can use for decoding with otherwise default values? 🍇
 - What is the longest reply you can force the model to generate with `batch_size`? 🍇🍇 
 - How can you force the code to behave deterministically when having the same dialogue history and already fixed random seed? 🍇🍇🍇
 - Best bleu, success, inform, richness score without fine tuning?
 
-**Results**
+### Results
 <details>
 | LLM model |  Decoding params |  Bleu  |   Success | Inform |  Richness |
 | ----------|------------------|--------|-----------|--------|-----------|
@@ -93,14 +92,15 @@ Investigate [different decoding strategies](https://huggingface.co/docs/transfor
 
 
 
-### Finetune LLAMA with QLora
+## 💪 Finetune LLAMA with QLora
 
-**Questions**
+### Questions
 - What LoRa modules work best? `attention`, `ffn`, `regexp_keys|values`, ...? 🍇🍇🍇🍇🍇
 - For the default parameters, what is the best number of training steps?🍇🍇🍇
 - What is the best learning rate and number of training steps?🍇🍇🍇
 
-**Results**
+### Results
+
 <details>
 | LLM model |  Training params |  Bleu  |   Success | Inform |  Richness |
 | ----------|------------------|--------|-----------|--------|-----------|
@@ -108,7 +108,7 @@ Investigate [different decoding strategies](https://huggingface.co/docs/transfor
 </details>
 
 
-### Explore of-the-shelf LLMs  
+## 🏆 Explore of-the-shelf LLMs  
 
 Open the [Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) and try to run different models.
 The LLAMA models and their derivations, such as Alpaca and Vicuna, should be compatible with the script.
@@ -117,21 +117,22 @@ Try also to scale the models' size, e.g., `EleutherAI/pythia-12b` instead `Eleut
 Note that the `pythia-70m`` model is excellent for debugging.
 Try also models trained on different datasets `OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5`.
 
-**Please insert the answers into the results in the table above for results with different decoding strategies**
-
-**Questions**
+### Questions
 - Do zero-shot models perform better as the number of parameters grows? For which metrics? 
   - Report results with `huggyllama/llama*` or `EleutherAI/pythia*` checkpoints. 🍇🍇
   - For other models, try at least three different sizes for the same model.  🍇🍇🍇
 - What is the largest model you were able to finetune? 🍇
 
-#### What next? Fix known TODOs
+**Please, insert the answers into the results in the table above for results with different decoding strategies.**
+
+
+## ✅︎ What next? Fix known TODOs ✅︎
 - Add the possibility to add "instruction" prompt before dialogue history🍇🍇🍇
 - Implement Evaluation callback to evaluate regularly during training.🍇🍇🍇
 - Train from scratch using `full_finetune` and [reinitilizing the weights](https://github.com/J4VORSKY/JSALT2023-MT-lab/blob/main/solutions/task_6.py#L26) with reasonable hyperparameters.🍇🍇🍇🍇
 - Clean the code 🍇
 
-#### What next? Experiments?Research Ideas? 💡 
+## 💡What next? Experiments?Research Ideas?💡
 - Evaluate Encoder-Decoder models, e.g. Flan-T5. Which architecture is better? There is a lot of [confusion](https://twitter.com/ShayneRedford/status/1668720485285199872?t=f3I3FS2VZ9Woq7GuyOeosg&s=19). 🤷
 - How would you use the embeddings for evaluation?
 - Do you use conversational models? How would you like to evaluate them?
@@ -144,18 +145,16 @@ Try also models trained on different datasets `OpenAssistant/oasst-sft-4-pythia-
 - Is there a dataset that captures prosody similar to a call-center agent / ideal prosody for a dialogue system?
 - [How to improve embeddings for automatic clustering](https://www.clsp.jhu.edu/ai_research_internships_for_undergraduates_23/#autodesign)?
 
+## 👏 Contributing
 
+If you have implemented a new feature, found a bug or want to fix a typo, please submit a pull request.🙏 
 
-## Contact
+### Contact
 - [Ondřej Plátek](opla.cz), [(UFAL, Charles University, Prague)](https://ufal.mff.cuni.cz/ondrej-platek))
 - [Santosh Kesiraju](https://www.fit.vut.cz/person/kesiraju/.cs), [(FIT, VUT, Brno)](https://www.fit.vut.cz/person/kesiraju/)
 - [Petr Schwarz](https://www.fit.vut.cz/person/schwarzp/.en), [(FIT, VUT, Brno)](https://www.fit.vut.cz/person/schwarzp/)
 
-## Contribute
-
-If you have implemented a new feature, found a bug or want to fix a typo, please submit a pull request.🙏 
-
-## Citation
+## 💭 Citation
 
 ```
 If you use the code or results from this tutorial please cite the tutorial in the following manner:
