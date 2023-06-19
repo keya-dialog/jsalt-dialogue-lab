@@ -30,6 +30,8 @@ and installing the complete list of dependencies specified in `environment.yml`.
 ```bash
 # Have a look at the environment.yml
 # The QLoRa finetuning requires cutting-edge libraries versions
+# Note: please use conda deactivate if you have other environment activated
+#   sometimes it creates problems.
 conda env create --prefix ./env -f environment.yml  # grab a coffee 
 
 # activating the locally stored environment is easy

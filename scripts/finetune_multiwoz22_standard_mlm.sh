@@ -5,8 +5,10 @@
 # --> avg dialogue has ~ 200 words
 set -euo pipefail
 source ./scripts/setup_env.sh
+model_name_or_path="$1"
+# model_name_or_path="huggyllama/llama-7b"
 
-if [[ $1 = "debug" ]] ; then
+if [[ $model_name_or_path = "debug" ]] ; then
   printf "\n\nWARNING: You are in a debugging mode for testing the script. Using a small model, few steps, etc.\n\n\n"
   max_steps=4
   gradient_accumulation_steps=2
@@ -24,8 +26,6 @@ else
   save_steps=500
   dataloader_num_workers=4
   max_eval_samples=1000
-  model_name_or_path="huggyllama/llama-7b"
-  # model_name_or_path="$1"  # uncomment if you want to provide your model on command line
 fi
 
 
