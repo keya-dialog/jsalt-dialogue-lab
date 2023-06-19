@@ -1,7 +1,7 @@
 # Neural Conversational AI Lab (JSALT 2023)
 The lab will familiarize you with response generation for task-oriented dialogues (TOD) using end-to-end approaches.
-We will use the MultiWOZ 2.2[1](https://arxiv.org/pdf/1810.00278.pdf)[2](https://aclanthology.org/2020.nlp4convai-1.13/)🧙 dataset and causal language models implemented in the `huggingface/`transformer` for a conditional generation.
-The QLoRa implementation from `huggingface/peft` library will allow us to finetune large pretrained Large Langauge Models (LLMS) e.g.  LLAMA 🦙 and Falcon, on relatively small GPUs in Google Colab Notebook or on your cluster.
+We will use the MultiWOZ 2.2[ [1](https://arxiv.org/pdf/1810.00278.pdf), [2](https://aclanthology.org/2020.nlp4convai-1.13/)]🧙 dataset and causal language models implemented  the `huggingface/transformer` for a conditional generation.
+The [QLoRa](https://arxiv.org/abs/2305.14314) implementation from `huggingface/peft` library will allow us to finetune large pretrained Large Langauge Models (LLMS) e.g.  LLAMA 🦙 and Falcon, on relatively small GPUs in Google Colab Notebook or on your cluster.
 
 **What will you learn?**
 - How to finetune large language model (LLM) using [QLoRa](https://huggingface.co/blog/4bit-transformers-bitsandbytes)💡 
@@ -37,9 +37,9 @@ conda env create --prefix ./env -f environment.yml  # grab a coffee
 # activating the locally stored environment is easy
 conda activate ./env
 
-# Run the main with debug argument. 
+# Run the next turn prediction with the "debug" model argument argument. 
 # It should trigger downloading a small pretrained model and the MultiWoz dataset from HuggingFace.
-TODO
+./scripts/finetune_multiwoz22_conditional_mlm.sh debug
 ```
 
 </details>
@@ -67,10 +67,10 @@ The first dummy training should take around 20 minutes.
 The script downloads a small pretrained model and the MultiWoz dataset from HuggingFace.
 
 ### Task 2: Questions
-- How to run this script on the JSALT cluster? 🍇🍇🍇🍇
 - What is your iteration speed for the training with the default values? 🍇
 - What is your iteration speed for the inference speed with the default values? 🍇
 - What machine and CUDA version do you have? 🍇🍇
+- How to run this script on the JSALT cluster? Contributions are welcome! 🍇🍇🍇🍇
 
 ### Task 2: Results 
 Feel free to fill in partial information, e.g., if you do not know your CUDA version, just write '-'.
@@ -86,12 +86,42 @@ Feel free to fill in partial information, e.g., if you do not know your CUDA ver
 ## 🚀 Evaluating pretrained model
 Let us start by comparing an untuned LLM (LLAMA) and an already fined-tuned LLAMA model using the functionality from the next section.
 
-
+<details>
+- Let's use the next turn generation, conditioned on previous dialogue context using the `./scripts/generate_prompted.sh` script.
+- However the script is prepared to load the base model in 4bit but also the additional trained weights from the LoRa trained checkpoint.
+- We do not have the LoRa checkpoint trained yet, so we need to modify the script.
+- Copy the script
 ```
-# Run the evaluation code for "huggyllama/llama-7b" and the "oplatek/llama-7b-mwz22-basic01".
-TODO
+cp ./scripts/generate_prompted.sh ./scripts/pp.sh  # prompted_pretrained
 ``` 
-Play with parameters like `top_k`, `temperature`, `max_new_tokens, `penalty_alpha`, etc.
+- Open the `pp.sh`script and remove the `--checkpoint_dir "$checkpoint_dir"` line.
+- Also adjust the `output_dir` to be named `output/$model_name_or_path/REST_IS_THE_SAME`
+- The results should look like
+```bash
+  qlora.py \
+    --dataloader_num_workers 0 \
+    --max_eval_samples 1000 \
+    --model_name_or_path huggyllama/llama-7b \
+    --output_dir "output/huggyllama/llama-7b/pred_multi_woz_v22_turns_1000_$$" \
+    --do_train False \
+    --do_eval False \
+    --do_predict True \
+    --predict_with_generate \
+    --per_device_eval_batch_size 4 \
+    --dataset $dataset \
+    --dataset_format $dataset_format \
+    --source_max_len 256 \
+    --target_max_len 288 \
+    --max_new_tokens 32 \
+    --do_sample \
+    --top_p 0.9 \
+    --num_beams 1 \
+```
+- Note that the dataloader_num_workers 0 is good for debugging. The dataloader runs in the main python thread. However, it is good to use more CPUs per 1 GPU. 
+- Explore the options and `qlora.py` especially the [Generation arguments](ttps://huggingface.co/docs/transformers/main_classes/text_generation).
+</details>
+
+Play with parameters like `top_k`, `temperature`, `max_new_tokens`, `penalty_alpha`, etc.
 Investigate [different decoding strategies](https://huggingface.co/docs/transformers/generation_strategies#contrastive-search).
 
 ### Task 3: Questions
