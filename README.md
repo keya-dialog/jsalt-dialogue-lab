@@ -148,6 +148,8 @@ _Please open a Pull Request._
 - Add the possibility to add an "instruction" prompt before dialogue history🍇🍇🍇
 - Implement Evaluation callback to evaluate regularly during training.🍇🍇🍇
 - Train from scratch using `full_finetune` and reinitializing the weights](https://github.com/J4VORSKY/JSALT2023-MT-lab/blob/main/solutions/task_6.py#L26) with reasonable hyperparameters.🍇🍇🍇🍇
+- Add `span_info` to the dataloader and tag named entities.🍇🍇🍇🍇.
+- Add dialogue state information to the dataloader and predict dialogue state instead of the words of the next response.🍇🍇🍇🍇🍇.
 - Clean the code 🍇
 
 ## 💡 Up for a challenge? What is the minimal experiment to add?💡
@@ -169,6 +171,8 @@ _Below is a conversation starter list related to the topic of [clustering dialog
 ## 👏 Contributing
 
 If you have implemented a new feature, found a bug, or want to fix a typo, please submit a pull request.🙏 
+
+Use the [black](https://github.com/psf/black) formatter to avoid merge conflicts in large PRs.
 
 In other cases, feel free to reach us too:<br/>
 [Ondřej Plátek](opla.cz), [(UFAL, Charles University, Prague)](https://ufal.mff.cuni.cz/ondrej-platek) <br/>

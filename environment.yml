@@ -1,0 +1,26 @@
+name: qlora-dialogues
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pytorch=2.0.1
+  - pytorch-cuda=11.8
+  - rust=1.64.0
+  - pip
+  - pip:
+    - bitsandbytes==0.39.0
+    - transformers @ git+https://github.com/huggingface/transformers.git@c5454eba9eac00a3e7d0a46a3d25aacd43187f1e
+    - peft @ git+https://github.com/huggingface/peft.git@08cb3dde577747f6ca6638c884fd66fd16cf2e9d
+    - accelerate @ git+https://github.com/huggingface/accelerate.git@535b52cef22c81a5cd01f971d0a573dd1c73762d
+    - einops==0.6.1
+    - evaluate==0.4.0
+    - scikit-learn==1.2.2
+    - sentencepiece==0.1.99
+    - git+https://github.com/Tomiinek/MultiWOZ_Evaluation.git@1d03eb438daf30e1f0a5f958f5c78fa0c56eaa38
+    # Reporting tool (highly recommended). Better TensorBoard.
+    - wandb==0.15.3
+    # Oplatek's debugging tools - completely optional.
+    - ipdb
+    - exp-notifier
