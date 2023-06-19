@@ -198,7 +198,7 @@ Try also models trained on different datasets `OpenAssistant/oasst-sft-4-pythia-
 **Please, insert the answers into Task 3: Results table.**
 
 
-## ✅︎ Bored? Improve the code! ✅︎
+## ✅︎ Bored? Improve the Code! ✅︎
 
 _Please open a Pull Request._
 
@@ -210,6 +210,8 @@ _Please open a Pull Request._
 - Clean the code 🍇
 
 ### Upload Your Model to Hugging Face Hub🤗 
+
+<details>
 
 1. Check the [documentation](https://huggingface.co/docs/hub/models-uploading) and setup an account on Hugging Face if you don't have it already.
 2. Create an user token and authenticate yourself in a command line. See the [quickstart](https://huggingface.co/docs/huggingface_hub/quick-start) for details. 
@@ -225,6 +227,8 @@ python merge_peft.py \
   --push_to_hub oplatek/pythia-70m-multi_woz_v22 \
   --output_dir some_local_outdir
 ```
+
+</details>
 
 ## 💡 Up for a challenge? What is the minimal experiment to add?💡
 _Below is a conversation starter list related to the topic of [clustering dialogues](https://github.com/keya-dialog/jsalt-dialogue-lab)._
