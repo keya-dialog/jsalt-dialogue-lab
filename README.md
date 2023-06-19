@@ -123,7 +123,7 @@ Investigate [different decoding strategies](https://huggingface.co/docs/transfor
 </details>
 
 
-## 🏆 Explore of-the-shelf LLMs  
+## 🏆 Explore available pretrained LLMs  
 
 Open the [Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) and try to run different models.
 The LLAMA models and their derivations, such as Alpaca and Vicuna, should be compatible with the script.
@@ -148,7 +148,7 @@ Try also models trained on different datasets `OpenAssistant/oasst-sft-4-pythia-
 - Clean the code 🍇
 
 ## 💡 Up for a challenge? What is the minimal experiment to add?💡
-__Below is a conversation starter list related to the lab. Take it with a grain of salt.__
+_Below is a conversation starter list related to the topic of [clustering dialogues](https://github.com/keya-dialog/jsalt-dialogue-lab). _
 
 - Evaluate Encoder-Decoder models, e.g., Flan-T5. Which architecture is better? [Up for debate/experiments.](https://twitter.com/ShayneRedford/status/1668720485285199872?t=f3I3FS2VZ9Woq7GuyOeosg&s=19). 🤷
 - How would you use the embeddings for evaluation?
