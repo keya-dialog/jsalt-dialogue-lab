@@ -90,11 +90,15 @@ class ModelArguments:
     )
 
 
-def group_turns_by_dialogue(turns):
+def group_turns_by_dialogue(turns, single_turn=False):
     JSON_SUFFIX_LEN = len(".json")
     d = defaultdict(list)
     for t in turns:
-        d[t["dialogue_id"][:-JSON_SUFFIX_LEN]].append(t)
+        # dialogue_id compatible with tomiinek/MultiWOZ_Evaluation scripts
+        dialogue_id = t["dialogue_id"][:-JSON_SUFFIX_LEN].lower()
+        if single_turn:
+            t["turn_id"] = 0  # we generate whole dialogues - this is a hack
+        d[dialogue_id].append(t)
 
     for turns in d.values():
         turns = sorted(turns, key=lambda t: t["turn_id"])
@@ -882,42 +886,39 @@ def train():
         for i, example in enumerate(data_module["predict_dataset"]):
             example["prediction_with_input"] = predictions[i].strip()
             example["response"] = predictions[i].replace(example["input"], "").strip()
-            turns.append(turns)
-        if args.dataset_format == "multi_woz_v22_turns":
-            diaturns = group_turns_by_dialogue(turns)
-            predictions_dialogs_json = os.path.join(
-                args.output_dir, "predictions_dialogs.json"
+            turns.append(example)
+        predictions_dialogs_json = os.path.join(
+            args.output_dir, "predictions_dialogs.json"
+        )
+        print(f"\nSaving responses to\n\t{predictions_dialogs_json}\n", flush=True)
+        diaturns = group_turns_by_dialogue(
+            turns, single_turn=args.dataset_format == "multi_woz_v22_dialogs"
+        )
+        with open(predictions_dialogs_json, "w") as w:
+            w.write("{\n")
+            w.write(
+                ",\n ".join([f'"{k}": {json.dumps(v)}' for k, v in diaturns.items()])
             )
-            with open(predictions_dialogs_json, "w") as w:
-                w.write("{\n")
-                w.write(
-                    ",\n ".join(
-                        [f'"{k}": {json.dumps(v)}' for k, v in diaturns.items()]
-                    )
-                )
-                w.write("}\n")
+            w.write("\n}")
+        if args.dataset_format == "multi_woz_v22_turns":
+            e = MWZEvaluator(bleu=True, success=True, richness=True)
+            results = e.evaluate(diaturns)
+            for metric, values in results.items():
+                if values is not None:
+                    print(f"====== {metric.upper()} ======")
+                    for k, v in values.items():
+                        print(f"{k.ljust(15)}{v}")
+                    print("")
+            with open(os.path.join(args.output_dir, "turn_results.json"), "w") as f:
+                json.dump(results, f)
+        else:
+            assert args.dataset_format == "multi_woz_v22_dialogs", args.dataset_format
+            print("TODO evaluate perplexity(richness) of generated dialogue")
 
         print(prediction_metrics)
         trainer.log_metrics("predict", prediction_metrics)
         trainer.save_metrics("predict", prediction_metrics)
         all_metrics.update(prediction_metrics)
-        print(
-            f"\nResponses groupped by dialogue saved to\n\t{predictions_dialogs_json}\n",
-            flush=True,
-        )
-
-        e = Evaluator(bleu=True, success=True, richness=True)
-        results = e.evaluate(diaturns)
-
-        for metric, values in results.items():
-            if values is not None:
-                print(f"====== {metric.upper()} ======")
-                for k, v in values.items():
-                    print(f"{k.ljust(15)}{v}")
-                print("")
-
-        with open(os.path.join(args.output_dir, "results.json", "w")) as f:
-            json.dump(results, f)
 
     if args.do_train or args.do_eval or args.do_predict:
         with open(os.path.join(args.output_dir, "metrics.json"), "w") as fout:

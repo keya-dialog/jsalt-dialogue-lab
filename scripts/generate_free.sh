@@ -1,4 +1,10 @@
 #!/bin/bash
+# Usage:
+#  <script> <base-model-name-or-path> <checkpoint_path>
+#
+# E.g.:
+# ./scripts/generate_free.sh EleutherAI/pythia-70m output/EleutherAI/pythia-70m_1687207221_1159787/checkpoint-4/
+# 
 set -euo pipefail
 source ./scripts/setup_env.sh
 
