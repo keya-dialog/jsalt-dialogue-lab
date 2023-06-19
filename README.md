@@ -15,7 +15,7 @@ The [QLoRa](https://arxiv.org/abs/2305.14314) implementation from `huggingface/p
 We are interested in how you use the code, so submit the answers via PRs or otherwise.
 Pick your rewards 🍇!
 
-## Environment setup
+## Environment Setup
 
 We prepared a `qlora.py` main python script and several bash launch scripts which showcase the `qlora.py` functionality.
 The same functionality is demonstrated in a [Google Colab notebook](TODO).
@@ -81,7 +81,7 @@ The script downloads a small pretrained model and the MultiWoz dataset from Hugg
 
 
 
-## 🚀 Evaluating pretrained model
+## 🚀 Evaluating Pretrained Model
 Let us start by comparing an untuned LLM (LLAMA) and an already fined-tuned `oplatek/llama-7b-todo-multi-woz` which I fine-tuned for you. (You will finetune your adapter/LoRa weights in the next task.) 
 
 <details>
@@ -180,7 +180,7 @@ Finally! Let us train the LoRa weights!
 </details>
 
 
-## 🏆 Explore available pretrained LLMs  
+## 🏆 Explore Available Pretrained LLMs  
 
 Open the [Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) and try to run different models.
 The LLAMA models and their derivations, such as Alpaca and Vicuna, should be compatible with the script.
