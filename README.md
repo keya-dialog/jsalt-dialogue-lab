@@ -82,19 +82,24 @@ The script downloads a small pretrained model and the MultiWoz dataset from Hugg
 
 
 ## 🚀 Evaluating pretrained model
-Let us start by comparing an untuned LLM (LLAMA) and an already fined-tuned LLAMA model using the functionality from the next section.
+Let us start by comparing an untuned LLM (LLAMA) and an already fined-tuned LLAMA which I fine-tuned for you. (You will finetune your adapter/LoRa weights in the next task.) 
 
 <details>
+
 - Let's use the next turn generation, conditioned on previous dialogue context using the `./scripts/generate_prompted.sh` script.
 - However the script is prepared to load the base model in 4bit but also the additional trained weights from the LoRa trained checkpoint.
 - We do not have the LoRa checkpoint trained yet, so we need to modify the script.
 - Copy the script
-```
+
+```bash
 cp ./scripts/generate_prompted.sh ./scripts/pp.sh  # prompted_pretrained
-``` 
+```
+
+
 - Open the `pp.sh`script and remove the `--checkpoint_dir "$checkpoint_dir"` line.
 - Also adjust the `output_dir` to be named `output/$model_name_or_path/REST_IS_THE_SAME`
 - The results should look like
+
 ```bash
   qlora.py \
     --dataloader_num_workers 0 \
@@ -115,8 +120,10 @@ cp ./scripts/generate_prompted.sh ./scripts/pp.sh  # prompted_pretrained
     --top_p 0.9 \
     --num_beams 1 \
 ```
-- Note that the dataloader_num_workers 0 is good for debugging. The dataloader runs in the main python thread. However, it is good to use more CPUs per 1 GPU. 
-- Explore the options and `qlora.py` especially the [Generation arguments](ttps://huggingface.co/docs/transformers/main_classes/text_generation).
+
+- Note that setting dataloader_num_workers to `0` is good for debugging. The dataloader runs in the main python thread. However, it is good to use more CPUs per 1 GPU if you are not debugging. 
+- Explore the options and `qlora.py` especially the [Generation arguments](ttps://huggingface.co/docs/transformers/main_classes/text_generation). You can easily add them to command line.
+
 </details>
 
 Play with parameters like `top_k`, `temperature`, `max_new_tokens`, `penalty_alpha`, etc.
