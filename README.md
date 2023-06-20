@@ -4,8 +4,8 @@ We will use the MultiWOZ 2.2[ [1](https://arxiv.org/pdf/1810.00278.pdf), [2](htt
 The [QLoRa](https://arxiv.org/abs/2305.14314) implementation from `huggingface/peft` library will allow us to finetune large pretrained Large Langauge Models (LLMS) e.g.  LLAMA 🦙 and Falcon, on relatively small GPUs in Google Colab Notebook or on your cluster.
 
 **What will you learn?**
-- How to finetune large language model (LLM) using [QLoRa](https://huggingface.co/blog/4bit-transformers-bitsandbytes)💡 
-- Tweaking parameters of [decoding/generation] process (https://huggingface.co/docs/transformers/main_classes/text_generation) with HuggingFace LLMs 🤗
+- How to finetune large language model (LLM) using [QLoRa](https://huggingface.co/blog/4bit-transformers-bitsandbytes).💡 
+- Tweaking parameters of [decoding/generation] process (https://huggingface.co/docs/transformers/main_classes/text_generation) with HuggingFace LLMs. 🤗
 - Get familiar with a typical TOD textual dataset MultiWoz[ [1](https://arxiv.org/pdf/1810.00278.pdf), [2](https://aclanthology.org/2020.nlp4convai-1.13/)].
 - How to evaluate task-oriented dialogues (TOD) using [standardized scripts](https://github.com/Tomiinek/MultiWOZ_Evaluation).
 
@@ -15,7 +15,7 @@ The solutions are intentionally hidden, so you have the chance to try to work on
 
 Share your findings. Improve the code. Pick your rewards 🍇!
 
-## Environment Setup
+## Task 1: Environment Setup
 
 We prepared a `qlora.py` main python script and several bash launch scripts which showcase the `qlora.py` functionality.
 The same functionality is demonstrated in a [Google Colab](https://colab.research.google.com/drive/1yjoe3YftmZjWwuMtNmYdYYjW9Ons4X3Y?usp=sharing).
@@ -81,7 +81,7 @@ The script downloads a small pretrained model and the MultiWoz dataset from Hugg
 
 
 
-## 🚀 Evaluating Pretrained Model
+## 🚀 Task 2: Evaluating Pretrained Model
 Let us start by comparing an untuned LLM (LLAMA) and an already fined-tuned `oplatek/llama-7b-todo-multi-woz` which I fine-tuned for you. (You will finetune your adapter/LoRa weights in the next task.) 
 
 <details>
@@ -129,13 +129,13 @@ cp ./scripts/generate_prompted.sh ./scripts/pp.sh  # prompted_pretrained
 Play with parameters like `top_k`, `temperature`, `max_new_tokens`, `penalty_alpha`, etc.
 Investigate [different decoding strategies](https://huggingface.co/docs/transformers/generation_strategies#contrastive-search).
 
-### Task 3: Questions
+### Task 2: Questions
 - What is the highest `batch_size` you can use for decoding with otherwise default values? 🍇
 - What is the longest reply you can force the model to generate with default values? 🍇🍇 
 - How can you force the code to behave deterministically when having the same dialogue history and already fixed random seed? 🍇🍇🍇
 - Best bleu, success, inform, richness score without fine tuning?
 
-### Task 3: Results
+### Task 2: Results
 <details>
 
 |LLM model |  Decoding params |  Bleu  |   Success | Inform |  Richness |
@@ -146,7 +146,7 @@ Investigate [different decoding strategies](https://huggingface.co/docs/transfor
 
 
 
-## 💪 Finetune LLAMA with QLora
+## 💪 Task 3: Finetune LLAMA with QLora
 Finally! Let us train the LoRa weights!
 
 <details>
@@ -160,7 +160,7 @@ Finally! Let us train the LoRa weights!
 
 </details>
 
-### Task 4: Questions
+### Task 3: Questions
 - What LoRa modules work best? `attention`, `ffn`, `regexp_keys|values`, ...? 🍇🍇🍇
 - For the default parameters, what is the best number of training steps?🍇🍇
 - What is the best learning rate and number of training steps?🍇🍇🍇
@@ -169,7 +169,7 @@ Finally! Let us train the LoRa weights!
   - The `multi_woz_v22_turns` format always "prompts" the model with dialogue history ending with `...\nbot>` telling the model to reply as a bot.
   - The `multi_woz_v22_turns` format is used in `scripts/finetune_multiwoz22_conditional_mlm.sh`
 
-### Task 4: Results
+### Task 3: Results
 
 <details>
 
@@ -180,7 +180,7 @@ Finally! Let us train the LoRa weights!
 </details>
 
 
-## 🏆 Explore Available Pretrained LLMs  
+## 🏆 Task 4: Explore Available Pretrained LLMs  
 
 Open the [Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) and try to run different models.
 The LLAMA models and their derivations, such as Alpaca and Vicuna, should be compatible with the script.
@@ -189,13 +189,13 @@ Try to scale the models' size, e.g., `EleutherAI/pythia-12b` instead `EleutherAI
 Note that the `pythia-70m` model is excellent for debugging.
 Try models trained on different datasets `OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5`.
 
-### Task5: Questions
+### Task4: Questions
 - Do zero-shot models perform better as the number of parameters grows? For which metrics? 
   - Report results with `huggyllama/llama*` or `EleutherAI/pythia*` checkpoints. 🍇🍇
   - For other models, try at least three different sizes for the same model.  🍇🍇🍇
 - What is the largest model you were able to finetune? 🍇
 
-**Please, insert the answers into Task 3: Results table.**
+**Please, insert the answers into Task 4: Results table.**
 
 
 ## ✅︎ Bored? Improve the Code! ✅︎
