@@ -5,7 +5,7 @@ The [QLoRa](https://arxiv.org/abs/2305.14314) implementation from `huggingface/p
 
 **What will you learn?**
 - How to finetune large language model (LLM) using [QLoRa](https://huggingface.co/blog/4bit-transformers-bitsandbytes).💡 
-- Tweaking parameters of [decoding/generation] process (https://huggingface.co/docs/transformers/main_classes/text_generation) with HuggingFace LLMs. 🤗
+- Tweaking parameters of [decoding/generation process](https://huggingface.co/docs/transformers/main_classes/text_generation) with HuggingFace LLMs. 🤗
 - Get familiar with a typical TOD textual dataset MultiWoz[ [1](https://arxiv.org/pdf/1810.00278.pdf), [2](https://aclanthology.org/2020.nlp4convai-1.13/)].
 - How to evaluate task-oriented dialogues (TOD) using [standardized scripts](https://github.com/Tomiinek/MultiWOZ_Evaluation).
 
