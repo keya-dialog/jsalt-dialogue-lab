@@ -47,13 +47,13 @@ conda activate ./env
 
 </details>
 
-**Task 1: Questions**
+### Task 1: Questions
 - How to run this script on the JSALT cluster? 🍇🍇🍇🍇
 - What is your iteration speed for the training with the `debug` setup? 🍇
 - What machine and CUDA version do you have? 🍇
 - How to run this script on the JSALT cluster? Contributions are welcome! 🍇🍇🍇🍇
 
-**Task 1: Results**
+### Task 1: Results
 Feel free to fill in partial information, e.g., if you do not know your CUDA version, just write '-'.
 
 <details>
