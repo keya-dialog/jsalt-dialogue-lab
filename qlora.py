@@ -9,7 +9,7 @@ Additional features:
         - as next word predictions from full dialogues
         For MultiWoz dataset description see the dataset card on HF:
         https://huggingface.co/datasets/multi_woz_v22
-    - scripts with sensible parameters for multi_woz_v22 
+    - scripts with sensible parameters for multi_woz_v22
         - finetuning
         - generation
     - scripts and fixes to use pythia (small) models for debugging
@@ -743,7 +743,7 @@ def make_data_module(tokenizer: transformers.PreTrainedTokenizer, args) -> Dict:
     )
 
 
-def train():
+def parse_args():
     hfparser = transformers.HfArgumentParser(
         (ModelArguments, DataArguments, TrainingArguments, GenerationArguments)
     )
@@ -760,6 +760,17 @@ def train():
     args = argparse.Namespace(
         **vars(model_args), **vars(data_args), **vars(training_args)
     )
+    return args, model_args, data_args, training_args, generation_args, extra_args
+
+
+def train(
+        args,
+        model_args,
+        data_args,
+        training_args,
+        generation_args,
+        extra_args,
+        ):
     set_seed(args.seed)
 
     if args.checkpoint_dir is not None:
@@ -928,4 +939,4 @@ def train():
 
 
 if __name__ == "__main__":
-    train()
+    train(*parse_args())

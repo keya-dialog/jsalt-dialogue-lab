@@ -18,7 +18,7 @@ Pick your rewards 🍇!
 ## Environment Setup
 
 We prepared a `qlora.py` main python script and several bash launch scripts which showcase the `qlora.py` functionality.
-The same functionality is demonstrated in a [Google Colab notebook](TODO).
+The same functionality is demonstrated in a [Google Colab](https://colab.research.google.com/drive/1yjoe3YftmZjWwuMtNmYdYYjW9Ons4X3Y?usp=sharing).
 The Google Colab is arguably more straightforward to set up but harder to work with.
 
 #### Running on a GPU machine/cluster
@@ -64,7 +64,7 @@ Feel free to fill in partial information, e.g., if you do not know your CUDA ver
 
 ####  Google Colab
 
-Open the [Google Colab](TODO).
+Open the [Google Colab](https://colab.research.google.com/drive/1yjoe3YftmZjWwuMtNmYdYYjW9Ons4X3Y?usp=sharing).
 Run the whole notebook and write down which GPU you were assigned and how much memory you have available.
 The first dummy training should take around 20 minutes.
 The script downloads a small pretrained model and the MultiWoz dataset from HuggingFace.
