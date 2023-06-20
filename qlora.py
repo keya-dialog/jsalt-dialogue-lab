@@ -22,6 +22,7 @@ if __name__ == "__main__":
 from collections import defaultdict
 from pathlib import Path
 import re
+import glob
 import copy
 import json
 import os
@@ -349,8 +350,6 @@ class SavePeftModelCallback(transformers.TrainerCallback):
         pytorch_model_path = os.path.join(checkpoint_folder, "pytorch_model.bin")
         if os.path.exists(pytorch_model_path):
             os.remove(pytorch_model_path)
-        # hack not using HF API
-        args.last_multiwoz_peft_checkpoint_folder = checkpoint_folder
 
     def on_save(self, args, state, control, **kwargs):
         self.save_model(args, state, kwargs)
@@ -762,23 +761,20 @@ def parse_args():
     training_args.generation_config = transformers.GenerationConfig(
         **vars(generation_args)
     )
-    args = argparse.Namespace(
-        **vars(model_args), **vars(data_args), **vars(training_args)
-    )
-    return args, model_args, data_args, training_args, generation_args, extra_args
+    return model_args, data_args, training_args, generation_args, extra_args
 
 
 def train(
-    args,
     model_args,
     data_args,
     training_args,
     generation_args,
     extra_args,
 ):
+    args = argparse.Namespace(
+        **vars(model_args), **vars(data_args), **vars(training_args)
+    )
     set_seed(args.seed)
-    # hack not using HF API
-    args.last_multiwoz_peft_checkpoint_folder = None
 
     if args.checkpoint_dir is not None:
         checkpoint_dir = Path(args.checkpoint_dir)
@@ -957,9 +953,11 @@ def train(
     # The only outputs of the stdout should be the output_dir and the checkpoint
     # so the bash scripts can be easily composed together.
     print(args.output_dir, flush=True)
-    print(args.last_multiwoz_peft_checkpoint_folder, flush=True)
 
-    return args.output_dir, args.last_multiwoz_peft_checkpoint_folder
+    checkpoints = glob.glob(f"{args.output_dir}/checkpoint-*")
+    print(",".join(checkpoints), flush=True)
+
+    return args.output_dir, checkpoints
 
 
 if __name__ == "__main__":
