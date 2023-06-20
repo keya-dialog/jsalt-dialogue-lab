@@ -3,18 +3,19 @@ The lab will get you familiar you with response generation for task-oriented dia
 We will use the MultiWOZ 2.2[ [1](https://arxiv.org/pdf/1810.00278.pdf), [2](https://aclanthology.org/2020.nlp4convai-1.13/)] dataset and causal language models implemented  the `huggingface/transformer` for a conditional generation.
 The [QLoRa](https://arxiv.org/abs/2305.14314) implementation from `huggingface/peft` library will allow us to finetune large pretrained Large Langauge Models (LLMS) e.g.  LLAMA 🦙 and Falcon, on relatively small GPUs in Google Colab Notebook or on your cluster.
 
-The Part 2 of the lab is self-contained in jupyter notebook, and deals with cluserting and visualization of MultiWoz data using pretrained language models, and simple unsupervised techniques. See the [notebook](Part_2_Cluster_and_Visualize_MultiWoz_Subset.ipynb)
+The Part 2 of the lab is self-contained in jupyter notebook, and deals with cluserting and visualization of MultiWoz data using pretrained language models,
+and simple unsupervised techniques. See the [notebook](Part_2_Cluster_and_Visualize_MultiWoz_Subset.ipynb)
 
 **What will you learn?**
-- How to finetune large language model (LLM) using [QLoRa](https://huggingface.co/blog/4bit-transformers-bitsandbytes).💡
-- Tweaking parameters of [decoding/generation] process (https://huggingface.co/docs/transformers/main_classes/text_generation) with HuggingFace LLMs. 🤗
+- How to finetune large language model (LLM) using [QLoRa](https://huggingface.co/blog/4bit-transformers-bitsandbytes).💡 
+- Tweaking parameters of [decoding/generation process](https://huggingface.co/docs/transformers/main_classes/text_generation) with HuggingFace LLMs. 🤗
 - Get familiar with a typical TOD textual dataset MultiWoz[ [1](https://arxiv.org/pdf/1810.00278.pdf), [2](https://aclanthology.org/2020.nlp4convai-1.13/)].
 - How to evaluate task-oriented dialogues (TOD) using [standardized scripts](https://github.com/Tomiinek/MultiWOZ_Evaluation).
 
-
+ 
 We prepared for you a series of tasks. A ready-to-use solution accompanies each task.
 The solutions are intentionally hidden, so you have the chance to try to work on the task on your own.
-Share your answers to the questions preferable over a pull request or over Discord.
+Share your answers to the questions preferable over a pull request or over Discord. 
 
 Share your findings. Improve the code. Pick your rewards 🍇!
 
@@ -25,7 +26,7 @@ The same functionality is demonstrated in a [Google Colab](https://colab.researc
 The Google Colab is arguably more straightforward to set up but harder to work with.
 
 #### Running on a GPU machine/cluster
-If you have a machine with a recent GPU with 16GB of memory, we recommend creating a conda environment
+If you have a machine with a recent GPU with 16GB of memory, we recommend creating a conda environment 
 and installing the complete list of dependencies specified in `environment.yml`.
 
 <details>
@@ -35,13 +36,13 @@ and installing the complete list of dependencies specified in `environment.yml`.
 # The QLoRa finetuning requires cutting-edge libraries versions
 # Note: please use conda deactivate if you have other environment activated
 #   sometimes it creates problems.
-conda env create --prefix ./env -f environment.yml  # grab a coffee
+conda env create --prefix ./env -f environment.yml  # grab a coffee 
 
 # activating the locally stored environment is easy
 # if you want to delete the environment simply delete the ./env folder
 conda activate ./env
 
-# Run the next turn prediction with the "debug" model argument argument.
+# Run the next turn prediction with the "debug" model argument argument. 
 # It should trigger downloading a small pretrained model and the MultiWoz dataset from HuggingFace.
 # The finetuning will run for 4 iterations.
 ./scripts/finetune_multiwoz22_conditional_mlm.sh debug
@@ -49,13 +50,13 @@ conda activate ./env
 
 </details>
 
-**Task 1: Questions**
+### Task 1: Questions
 - How to run this script on the JSALT cluster? 🍇🍇🍇🍇
 - What is your iteration speed for the training with the `debug` setup? 🍇
 - What machine and CUDA version do you have? 🍇
 - How to run this script on the JSALT cluster? Contributions are welcome! 🍇🍇🍇🍇
 
-**Task 1: Results**
+### Task 1: Results
 Feel free to fill in partial information, e.g., if you do not know your CUDA version, just write '-'.
 
 <details>
@@ -86,7 +87,8 @@ The script downloads a small pretrained model and the MultiWoz dataset from Hugg
 
 
 ## 🚀 Task 2: Evaluating Pretrained Model
-Let us start by comparing an untuned LLM (LLAMA) and an already fined-tuned `oplatek/llama-7b-todo-multi-woz` which I fine-tuned for you. (You will finetune your adapter/LoRa weights in the next task.)
+Let us start by comparing an untuned LLM (LLAMA) and minimally fined-tuned `oplatek/pythia-70m-multi_woz_v22` which I fine-tuned for you in 4 steps.
+You will finetune your adapter/LoRa weights in the next task. In the lab you will also learn how to upload your model to HuggingFace Lab too. 
 
 <details>
 
@@ -125,7 +127,7 @@ cp ./scripts/generate_prompted.sh ./scripts/pp.sh  # prompted_pretrained
     --num_beams 1 \
 ```
 
-- Note that setting dataloader_num_workers to `0` is good for debugging. The dataloader runs in the main python thread. However, it is good to use more CPUs per 1 GPU if you are not debugging.
+- Note that setting dataloader_num_workers to `0` is good for debugging. The dataloader runs in the main python thread. However, it is good to use more CPUs per 1 GPU if you are not debugging. 
 - Explore the options and `qlora.py` especially the [Generation arguments](ttps://huggingface.co/docs/transformers/main_classes/text_generation). You can easily add them to the command line.
 
 </details>
@@ -135,7 +137,7 @@ Investigate [different decoding strategies](https://huggingface.co/docs/transfor
 
 ### Task 2: Questions
 - What is the highest `batch_size` you can use for decoding with otherwise default values? 🍇
-- What is the longest reply you can force the model to generate with default values? 🍇🍇
+- What is the longest reply you can force the model to generate with default values? 🍇🍇 
 - How can you force the code to behave deterministically when having the same dialogue history and already fixed random seed? 🍇🍇🍇
 - Best bleu, success, inform, richness score without fine tuning?
 
@@ -184,7 +186,7 @@ Finally! Let us train the LoRa weights!
 </details>
 
 
-## 🏆 Task 4: Explore Available Pretrained LLMs
+## 🏆 Task 4: Explore Available Pretrained LLMs  
 
 Open the [Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) and try to run different models.
 The LLAMA models and their derivations, such as Alpaca and Vicuna, should be compatible with the script.
@@ -194,7 +196,7 @@ Note that the `pythia-70m` model is excellent for debugging.
 Try models trained on different datasets `OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5`.
 
 ### Task4: Questions
-- Do zero-shot models perform better as the number of parameters grows? For which metrics?
+- Do zero-shot models perform better as the number of parameters grows? For which metrics? 
   - Report results with `huggyllama/llama*` or `EleutherAI/pythia*` checkpoints. 🍇🍇
   - For other models, try at least three different sizes for the same model.  🍇🍇🍇
 - What is the largest model you were able to finetune? 🍇
@@ -213,12 +215,12 @@ _Please open a Pull Request._
 - Add dialogue state information to the dataloader and predict dialogue state instead of the words of the next response.🍇🍇🍇🍇🍇.
 - Clean the code 🍇
 
-### Upload Your Model to Hugging Face Hub🤗
+### Upload Your Model to Hugging Face Hub🤗 
 
 <details>
 
 1. Check the [documentation](https://huggingface.co/docs/hub/models-uploading) and setup an account on Hugging Face if you don't have it already.
-2. Create an user token and authenticate yourself in a command line. See the [quickstart](https://huggingface.co/docs/huggingface_hub/quick-start) for details.
+2. Create an user token and authenticate yourself in a command line. See the [quickstart](https://huggingface.co/docs/huggingface_hub/quick-start) for details. 
 3. Create a repository on the huggingface.
 4. See `./merge_peft.py` script which will merge your weights to the base model so it could be used as regular transformer again. Finally use it with `--push_to_hub` option.🎉
 
@@ -237,12 +239,12 @@ python merge_peft.py \
 
 ## 👏 Contributing
 
-If you have implemented a new feature, found a bug, or want to fix a typo, please submit a pull request.🙏
+If you have implemented a new feature, found a bug, or want to fix a typo, please submit a pull request.🙏 
 
 Use the [black](https://github.com/psf/black) formatter to avoid merge conflicts in large PRs.
 
 In other cases, feel free to reach us too:<br/>
-[Ondřej Plátek](opla.cz), [(UFAL, Charles University, Prague)](https://ufal.mff.cuni.cz/ondrej-platek) <br/>
+[Ondřej Plátek](https://opla.cz), [(UFAL, Charles University, Prague)](https://ufal.mff.cuni.cz/ondrej-platek) <br/>
 [Santosh Kesiraju](https://www.fit.vut.cz/person/kesiraju/.cs), [(FIT, VUT, Brno)](https://www.fit.vut.cz/person/kesiraju/) <br/>
 [Petr Schwarz](https://www.fit.vut.cz/person/schwarzp/.en), [(FIT, VUT, Brno)](https://www.fit.vut.cz/person/schwarzp/) <br/>
 
