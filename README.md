@@ -1,5 +1,7 @@
 # Neural Conversational AI Lab (JSALT 2023)
 
+_Welcome to the afternoon lab accompanying the presentations [Neural Conversation AI](https://github.com/keya-dialog/jsalt-dialogue-lab/tree/main/conv_ai_v6.pdf) and [LLMs](https://github.com/keya-dialog/jsalt-dialogue-lab/tree/main/llms_v6.pdf)._
+
 ## Clustering and Visualization of MultiWOZ
 The Part 2 of the lab is self-contained in jupyter notebook, and deals with cluserting and visualization of MultiWoz data using pretrained language models, and simple unsupervised techniques. 
 **See the standalone [notebook](Part_2_Cluster_and_Visualize_MultiWoz_Subset.ipynb)**
