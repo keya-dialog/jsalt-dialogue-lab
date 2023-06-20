@@ -204,7 +204,7 @@ _Please open a Pull Request._
 
 - Add the possibility to add an "instruction" prompt before dialogue history🍇🍇🍇
 - Implement Evaluation callback to evaluate regularly during training.🍇🍇🍇
-- Train from scratch using `full_finetune` and reinitializing the weights](https://github.com/J4VORSKY/JSALT2023-MT-lab/blob/main/solutions/task_6.py#L26) with reasonable hyperparameters.🍇🍇🍇🍇
+- Train from scratch using `full_finetune` and [reinitializing the weights](https://github.com/J4VORSKY/JSALT2023-MT-lab/blob/main/solutions/task_6.py#L26) with reasonable hyperparameters.🍇🍇🍇🍇
 - Add `span_info` to the dataloader and tag named entities.🍇🍇🍇🍇.
 - Add dialogue state information to the dataloader and predict dialogue state instead of the words of the next response.🍇🍇🍇🍇🍇.
 - Clean the code 🍇
