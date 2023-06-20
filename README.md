@@ -195,7 +195,7 @@ Try models trained on different datasets `OpenAssistant/oasst-sft-4-pythia-12b-e
   - For other models, try at least three different sizes for the same model.  🍇🍇🍇
 - What is the largest model you were able to finetune? 🍇
 
-**Please, insert the answers into Task 4: Results table.**
+**Please, insert the answers into Task 2: Results table.**
 
 
 ## ✅︎ Bored? Improve the Code! ✅︎
