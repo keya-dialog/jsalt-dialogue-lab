@@ -16,7 +16,7 @@ checkpoint_dir="$2"
 
 dataset=multi_woz_v22
 dataset_format=multi_woz_v22_turns
-num_samples=10
+num_samples=100
 # Let's store the output dir based on the model name
 # If the PEFT weights are saved in checkpoint_dir,
 #  store the output in the checkpoint subdirectory.

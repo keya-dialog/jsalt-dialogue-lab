@@ -160,6 +160,7 @@ class TrainingArguments(transformers.Seq2SeqTrainingArguments):
             "help": "Whether to train on the input in addition to the target text."
         },
     )
+    print_turns: int = field(default=10)
     full_finetune: bool = field(
         default=False, metadata={"help": "Finetune the entire model without adapters."}
     )
@@ -643,6 +644,7 @@ def make_data_module(tokenizer: transformers.PreTrainedTokenizer, args) -> Dict:
                         inputs.append(dial_hist_str)
                         targets.append(dial_hist_str + utterances[turn_id])
                         turn_ids.append(turn_id)
+                        dialog_history[-1] = f"{BOT_PREFIX}{utterances[turn_id]}"
                 return (
                     inputs,
                     targets,
@@ -761,22 +763,16 @@ def parse_args():
     training_args.generation_config = transformers.GenerationConfig(
         **vars(generation_args)
     )
-    return model_args, data_args, training_args, generation_args, extra_args
-
-
-def train(
-    model_args,
-    data_args,
-    training_args,
-    generation_args,
-    extra_args,
-):
     args = argparse.Namespace(
         **vars(model_args),
         **vars(data_args),
         **vars(training_args),
-        **vars(generation_args),
     )
+    print(f"INFO: {extra_args=}", file=sys.stderr)
+    return args, training_args
+
+
+def train(args, training_args):
     set_seed(args.seed)
 
     if args.checkpoint_dir is not None:
@@ -922,6 +918,14 @@ def train(
             )
             w.write("\n}")
         if args.dataset_format == "multi_woz_v22_turns":
+            for idx, (dialogue_id, turns) in zip(
+                range(args.print_turns), diaturns.items()
+            ):
+                for tidx, turn in enumerate(turns):
+                    print(
+                        f"=======[{idx}, {dialogue_id}, {tidx}]======\n{turn['prediction_with_input']}\n---vs---\n{turn['output']}",
+                        file=sys.stderr,
+                    )
             e = MWZEvaluator(bleu=True, success=True, richness=True)
             results = e.evaluate(diaturns)
             for metric, values in results.items():
