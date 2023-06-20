@@ -10,10 +10,10 @@ The [QLoRa](https://arxiv.org/abs/2305.14314) implementation from `huggingface/p
 - How to evaluate task-oriented dialogues (TOD) using [standardize scripts](https://github.com/Tomiinek/MultiWOZ_Evaluation).
 
  
- We prepared for you a series of tasks. A ready-to-use solution accompanies each task.
- The solutions are intentionally hidden, so you have the chance to try to work on the task on your own.
-We are interested in how you use the code, so submit the answers via PRs or otherwise.
-Pick your rewards 🍇!
+We prepared for you a series of tasks. A ready-to-use solution accompanies each task.
+The solutions are intentionally hidden, so you have the chance to try to work on the task on your own.
+
+Share your findings. Improve the code. Pick your rewards 🍇!
 
 ## Environment Setup
 
@@ -184,10 +184,10 @@ Finally! Let us train the LoRa weights!
 
 Open the [Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) and try to run different models.
 The LLAMA models and their derivations, such as Alpaca and Vicuna, should be compatible with the script.
-We also tested the code with `EleutherAI/pythia-70m`.
-Try also to scale the models' size, e.g., `EleutherAI/pythia-12b` instead `EleutherAI/pythia-70m`.
-Note that the `pythia-70m`` model is excellent for debugging.
-Try also models trained on different datasets `OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5`.
+We tested the code with `EleutherAI/pythia-70m`.
+Try to scale the models' size, e.g., `EleutherAI/pythia-12b` instead `EleutherAI/pythia-70m`.
+Note that the `pythia-70m` model is excellent for debugging.
+Try models trained on different datasets `OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5`.
 
 ### Task5: Questions
 - Do zero-shot models perform better as the number of parameters grows? For which metrics? 
