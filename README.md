@@ -10,10 +10,10 @@ The [QLoRa](https://arxiv.org/abs/2305.14314) implementation from `huggingface/p
 - How to evaluate task-oriented dialogues (TOD) using [standardized scripts](https://github.com/Tomiinek/MultiWOZ_Evaluation).
 
  
- We prepared for you a series of tasks. A ready-to-use solution accompanies each task.
- The solutions are intentionally hidden, so you have the chance to try to work on the task on your own.
-We are interested in how you use the code, so submit the answers via PRs or otherwise.
-Pick your rewards 🍇!
+We prepared for you a series of tasks. A ready-to-use solution accompanies each task.
+The solutions are intentionally hidden, so you have the chance to try to work on the task on your own.
+
+Share your findings. Improve the code. Pick your rewards 🍇!
 
 ## Environment Setup
 
@@ -184,10 +184,10 @@ Finally! Let us train the LoRa weights!
 
 Open the [Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) and try to run different models.
 The LLAMA models and their derivations, such as Alpaca and Vicuna, should be compatible with the script.
-We also tested the code with `EleutherAI/pythia-70m`.
-Try also to scale the models' size, e.g., `EleutherAI/pythia-12b` instead `EleutherAI/pythia-70m`.
-Note that the `pythia-70m`` model is excellent for debugging.
-Try also models trained on different datasets `OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5`.
+We tested the code with `EleutherAI/pythia-70m`.
+Try to scale the models' size, e.g., `EleutherAI/pythia-12b` instead `EleutherAI/pythia-70m`.
+Note that the `pythia-70m` model is excellent for debugging.
+Try models trained on different datasets `OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5`.
 
 ### Task5: Questions
 - Do zero-shot models perform better as the number of parameters grows? For which metrics? 
@@ -204,7 +204,7 @@ _Please open a Pull Request._
 
 - Add the possibility to add an "instruction" prompt before dialogue history🍇🍇🍇
 - Implement Evaluation callback to evaluate regularly during training.🍇🍇🍇
-- Train from scratch using `full_finetune` and reinitializing the weights](https://github.com/J4VORSKY/JSALT2023-MT-lab/blob/main/solutions/task_6.py#L26) with reasonable hyperparameters.🍇🍇🍇🍇
+- Train from scratch using `full_finetune` and [reinitializing the weights](https://github.com/J4VORSKY/JSALT2023-MT-lab/blob/main/solutions/task_6.py#L26) with reasonable hyperparameters.🍇🍇🍇🍇
 - Add `span_info` to the dataloader and tag named entities.🍇🍇🍇🍇.
 - Add dialogue state information to the dataloader and predict dialogue state instead of the words of the next response.🍇🍇🍇🍇🍇.
 - Clean the code 🍇
@@ -230,21 +230,6 @@ python merge_peft.py \
 
 </details>
 
-## 💡 Up for a Challenge? What is the Minimal Experiment to Add?💡
-_Below is a conversation starter list related to the topic of [clustering dialogues](https://github.com/keya-dialog/jsalt-dialogue-lab)._
-
-- Evaluate Encoder-Decoder models, e.g., Flan-T5. Which architecture is better? [Up for debate/experiments.](https://twitter.com/ShayneRedford/status/1668720485285199872?t=f3I3FS2VZ9Woq7GuyOeosg&s=19). 🤷
-- How would you use the embeddings for evaluation?
-- Do you use conversational models? How would you like to evaluate them?
-- What should be the first experiment for multimodal setup with audio/speech and text?
-- Can you recommend some spoken task-oriented datasets? We know about:
-    - [Let's go](https://github.com/DialRC/LetsGoDataset)
-    - [SpokenWOZ](https://spokenwoz.github.io/SpokenWOZ-github.io/) 
-    - [Ryan speech](http://mohammadmahoor.com/ryanspeech-request-form/)
-    - [DSTC11: Speech-Aware Dialog Systems Technology Challenge](https://storage.googleapis.com/gresearch/dstc11/dstc11.2022-09-29a.html)
-    - ❓
-- Is there a dataset that captures prosody similar to a call-center agent / ideal prosody for a dialogue system?
-- [How to improve embeddings for automatic clustering](https://www.clsp.jhu.edu/ai_research_internships_for_undergraduates_23/#autodesign)?
 
 ## 👏 Contributing
 
