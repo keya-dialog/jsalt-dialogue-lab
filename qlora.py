@@ -212,7 +212,7 @@ class TrainingArguments(transformers.Seq2SeqTrainingArguments):
         },
     )
     max_steps: int = field(
-        default=10000, metadata={"help": "How many optimizer update steps to take"}
+        default=650, metadata={"help": "How many optimizer update steps to take"}
     )
     weight_decay: float = field(
         default=0.0, metadata={"help": "The L2 weight decay rate of AdamW"}
@@ -258,7 +258,7 @@ class TrainingArguments(transformers.Seq2SeqTrainingArguments):
     save_strategy: str = field(
         default="steps", metadata={"help": "When to save checkpoints"}
     )
-    save_steps: int = field(default=250, metadata={"help": "How often to save a model"})
+    save_steps: int = field(default=200, metadata={"help": "How often to save a model"})
     save_total_limit: int = field(
         default=40,
         metadata={
