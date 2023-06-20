@@ -84,7 +84,8 @@ The script downloads a small pretrained model and the MultiWoz dataset from Hugg
 
 
 ## 🚀 Task 2: Evaluating Pretrained Model
-Let us start by comparing an untuned LLM (LLAMA) and an already fined-tuned `oplatek/llama-7b-todo-multi-woz` which I fine-tuned for you. (You will finetune your adapter/LoRa weights in the next task.) 
+Let us start by comparing an untuned LLM (LLAMA) and minimally fined-tuned `oplatek/pythia-70m-multi_woz_v22` which I fine-tuned for you in 4 steps.
+You will finetune your adapter/LoRa weights in the next task. In the lab you will also learn how to upload your model to HuggingFace Lab too. 
 
 <details>
 
