@@ -143,7 +143,7 @@ class DataArguments:
         },
     )
     dataset_format: Optional[str] = field(
-        default=None,
+        default="multi_woz_v22_turns",
         metadata={
             "help": "Which dataset format is used. [alpaca|chip2|self-instruct|hh-rlhf|multi_woz_v22_turns|multi_woz_v22_dialogs]"
         },
