@@ -24,10 +24,10 @@ if [[ $model_name_or_path = "debug" ]] ; then
 else
   # These args make the training to take long.
   # For debugging / starting with the script it make sense to try faster & less performant settings.
-  max_steps=1875
+  max_steps=650
   gradient_accumulation_steps=16
   logging_steps=10
-  save_steps=500
+  save_steps=200
   dataloader_num_workers=4
   max_eval_samples=1000
 fi

@@ -333,7 +333,7 @@ def find_linear_names(args, model):
 
 class SavePeftModelCallback(transformers.TrainerCallback):
     def save_model(self, args, state, kwargs):
-        print("Saving PEFT checkpoint...")
+        print("Saving PEFT checkpoint...", file=sys.stderr)
         if state.best_model_checkpoint is not None:
             checkpoint_folder = os.path.join(
                 state.best_model_checkpoint, "adapter_model"
@@ -349,6 +349,8 @@ class SavePeftModelCallback(transformers.TrainerCallback):
         pytorch_model_path = os.path.join(checkpoint_folder, "pytorch_model.bin")
         if os.path.exists(pytorch_model_path):
             os.remove(pytorch_model_path)
+        # hack not using HF API
+        args.last_multiwoz_peft_checkpoint_folder = checkpoint_folder
 
     def on_save(self, args, state, control, **kwargs):
         self.save_model(args, state, kwargs)
@@ -379,7 +381,7 @@ def get_accelerate_model(args, checkpoint_dir):
     if args.full_finetune:
         assert args.bits in [16, 32]
 
-    print(f"loading base model {args.model_name_or_path}...")
+    print(f"loading base model {args.model_name_or_path}...", file=sys.stderr)
     compute_dtype = (
         torch.float16 if args.fp16 else (torch.bfloat16 if args.bf16 else torch.float32)
     )
@@ -410,11 +412,12 @@ def get_accelerate_model(args, checkpoint_dir):
     if compute_dtype == torch.float16 and args.bits == 4:
         major, minor = torch.cuda.get_device_capability()
         if major >= 8:
-            print("=" * 80)
+            print("=" * 80, file=sys.stderr)
             print(
-                "Your GPU supports bfloat16, you can accelerate training with the argument --bf16"
+                "Your GPU supports bfloat16, you can accelerate training with the argument --bf16",
+                file=sys.stderr,
             )
-            print("=" * 80)
+            print("=" * 80, file=sys.stderr)
 
     setattr(model, "model_parallel", True)
     setattr(model, "is_parallelizable", True)
@@ -432,13 +435,13 @@ def get_accelerate_model(args, checkpoint_dir):
 
     if not args.full_finetune:
         if checkpoint_dir is not None:
-            print("Loading adapters from checkpoint.")
+            print("Loading adapters from checkpoint.", file=sys.stderr)
             model = PeftModel.from_pretrained(
                 model, join(checkpoint_dir, "adapter_model"), is_trainable=True
             )
         else:
             lora_modules = find_linear_names(args, model)
-            print(f"adding LoRA modules {lora_modules=}")
+            print(f"adding LoRA modules {lora_modules=}", file=sys.stderr)
             config = LoraConfig(
                 r=args.lora_r,
                 lora_alpha=args.lora_alpha,
@@ -477,7 +480,8 @@ def print_trainable_parameters(args, model):
     print(
         f"trainable params: {trainable_params} || "
         f"all params: {all_param} || "
-        f"trainable: {100 * trainable_params / all_param}"
+        f"trainable: {100 * trainable_params / all_param}",
+        file=sys.stderr,
     )
 
 
@@ -701,7 +705,8 @@ def make_data_module(tokenizer: transformers.PreTrainedTokenizer, args) -> Dict:
             eval_dataset = dataset["test"]
         else:
             print(
-                "Splitting train dataset in train and validation according to `eval_dataset_size`"
+                "Splitting train dataset in train and validation according to `eval_dataset_size`",
+                file=sys.stderr,
             )
             dataset = dataset["train"].train_test_split(
                 test_size=args.eval_dataset_size, shuffle=True, seed=42
@@ -764,14 +769,16 @@ def parse_args():
 
 
 def train(
-        args,
-        model_args,
-        data_args,
-        training_args,
-        generation_args,
-        extra_args,
-        ):
+    args,
+    model_args,
+    data_args,
+    training_args,
+    generation_args,
+    extra_args,
+):
     set_seed(args.seed)
+    # hack not using HF API
+    args.last_multiwoz_peft_checkpoint_folder = None
 
     if args.checkpoint_dir is not None:
         checkpoint_dir = Path(args.checkpoint_dir)
@@ -782,7 +789,7 @@ def train(
     model = get_accelerate_model(args, checkpoint_dir)
     model.config.use_cache = False
     print_trainable_parameters(args, model)
-    print("loaded model")
+    print("loaded model", file=sys.stderr)
 
     # Tokenizer
     tokenizer = AutoTokenizer.from_pretrained(
@@ -807,7 +814,7 @@ def train(
         # Check and add them if missing to prevent them from being parsed into different tokens.
         # Note that these are present in the vocabulary.
         # Note also that `model.config.pad_token_id` is 0 which corresponds to `<unk>` token.
-        print("Adding special tokens.")
+        print("Adding special tokens.", file=sys.stderr)
         tokenizer.add_special_tokens(
             {
                 "eos_token": tokenizer.convert_ids_to_tokens(model.config.eos_token_id),
@@ -851,7 +858,7 @@ def train(
     for k, v in dtypes.items():
         total += v
     for k, v in dtypes.items():
-        print(k, v, v / total)
+        print(k, v, v / total, file=sys.stderr)
 
     all_metrics = {"run_name": args.run_name}
     # Training
@@ -876,7 +883,7 @@ def train(
     if args.do_predict:
         logger.info("*** Predict ***")
         if not training_args.predict_with_generate:
-            print("WARNING: setting predict_with_generate")
+            print("WARNING: setting predict_with_generate", file=sys.stderr)
             training_args.predict_with_generate = True
             trainer = Seq2SeqTrainer(
                 model=model,
@@ -901,7 +908,11 @@ def train(
         predictions_dialogs_json = os.path.join(
             args.output_dir, "predictions_dialogs.json"
         )
-        print(f"\nSaving responses to\n\t{predictions_dialogs_json}\n", flush=True)
+        print(
+            f"\nSaving responses to\n\t{predictions_dialogs_json}\n",
+            flush=True,
+            file=sys.stderr,
+        )
         diaturns = group_turns_by_dialogue(
             turns, single_turn=args.dataset_format == "multi_woz_v22_dialogs"
         )
@@ -916,17 +927,20 @@ def train(
             results = e.evaluate(diaturns)
             for metric, values in results.items():
                 if values is not None:
-                    print(f"====== {metric.upper()} ======")
+                    print(f"====== {metric.upper()} ======", file=sys.stderr)
                     for k, v in values.items():
-                        print(f"{k.ljust(15)}{v}")
-                    print("")
+                        print(f"{k.ljust(15)}{v}", file=sys.stderr)
+                    print("", file=sys.stderr)
             with open(os.path.join(args.output_dir, "turn_results.json"), "w") as f:
                 json.dump(results, f)
         else:
             assert args.dataset_format == "multi_woz_v22_dialogs", args.dataset_format
-            print("TODO evaluate perplexity(richness) of generated dialogue")
+            print(
+                "TODO evaluate perplexity(richness) of generated dialogue",
+                file=sys.stderr,
+            )
 
-        print(prediction_metrics)
+        print(prediction_metrics, file=sys.stderr)
         trainer.log_metrics("predict", prediction_metrics)
         trainer.save_metrics("predict", prediction_metrics)
         all_metrics.update(prediction_metrics)
@@ -935,7 +949,17 @@ def train(
         with open(os.path.join(args.output_dir, "metrics.json"), "w") as fout:
             fout.write(json.dumps(all_metrics))
 
-    print(f"output_dir:\n\t{args.output_dir}\n", flush=True)
+    print(
+        f"output_dir and PEFT checkpoint folder:\n\t{args.output_dir}\n",
+        flush=True,
+        file=sys.stderr,
+    )
+    # The only outputs of the stdout should be the output_dir and the checkpoint
+    # so the bash scripts can be easily composed together.
+    print(args.output_dir, flush=True)
+    print(args.last_multiwoz_peft_checkpoint_folder, flush=True)
+
+    return args.output_dir, args.last_multiwoz_peft_checkpoint_folder
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 # Neural Conversational AI Lab (JSALT 2023)
-The lab will familiarize you with response generation for task-oriented dialogues (TOD) using end-to-end approaches.
-We will use the MultiWOZ 2.2[ [1](https://arxiv.org/pdf/1810.00278.pdf), [2](https://aclanthology.org/2020.nlp4convai-1.13/)]🧙 dataset and causal language models implemented  the `huggingface/transformer` for a conditional generation.
+The lab will get you familiar you with response generation for task-oriented dialogues (TOD) using end-to-end neural models.
+We will use the MultiWOZ 2.2[ [1](https://arxiv.org/pdf/1810.00278.pdf), [2](https://aclanthology.org/2020.nlp4convai-1.13/)] dataset and causal language models implemented  the `huggingface/transformer` for a conditional generation.
 The [QLoRa](https://arxiv.org/abs/2305.14314) implementation from `huggingface/peft` library will allow us to finetune large pretrained Large Langauge Models (LLMS) e.g.  LLAMA 🦙 and Falcon, on relatively small GPUs in Google Colab Notebook or on your cluster.
 
 **What will you learn?**
@@ -12,6 +12,7 @@ The [QLoRa](https://arxiv.org/abs/2305.14314) implementation from `huggingface/p
  
 We prepared for you a series of tasks. A ready-to-use solution accompanies each task.
 The solutions are intentionally hidden, so you have the chance to try to work on the task on your own.
+Share your answers to the questions preferable over a pull request or over Discord. 
 
 Share your findings. Improve the code. Pick your rewards 🍇!
 
@@ -35,10 +36,12 @@ and installing the complete list of dependencies specified in `environment.yml`.
 conda env create --prefix ./env -f environment.yml  # grab a coffee 
 
 # activating the locally stored environment is easy
+# if you want to delete the environment simply delete the ./env folder
 conda activate ./env
 
 # Run the next turn prediction with the "debug" model argument argument. 
 # It should trigger downloading a small pretrained model and the MultiWoz dataset from HuggingFace.
+# The finetuning will run for 4 iterations.
 ./scripts/finetune_multiwoz22_conditional_mlm.sh debug
 ```
 
@@ -46,8 +49,7 @@ conda activate ./env
 
 **Task 1: Questions**
 - How to run this script on the JSALT cluster? 🍇🍇🍇🍇
-- What is your iteration speed for the training with the default values? 🍇
-- What is your iteration speed for the inference speed with the default values? 🍇
+- What is your iteration speed for the training with the `debug` setup? 🍇
 - What machine and CUDA version do you have? 🍇
 - How to run this script on the JSALT cluster? Contributions are welcome! 🍇🍇🍇🍇
 
