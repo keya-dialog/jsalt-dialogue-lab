@@ -1,11 +1,15 @@
 # Neural Conversational AI Lab (JSALT 2023)
+
+## Clustering and Visualization of MultiWOZ
+The Part 2 of the lab is self-contained in jupyter notebook, and deals with cluserting and visualization of MultiWoz data using pretrained language models, and simple unsupervised techniques. 
+**See the standalone [notebook](Part_2_Cluster_and_Visualize_MultiWoz_Subset.ipynb)**
+
+## QLoRa Next Response Predictions with LLMs 
+_This Part 1 of the lab is described here in the README_
 The lab will get you familiar you with response generation for task-oriented dialogues (TOD) using end-to-end neural models.
 We will use the MultiWOZ 2.2[ [1](https://arxiv.org/pdf/1810.00278.pdf), [2](https://aclanthology.org/2020.nlp4convai-1.13/)] dataset and causal language models implemented  the `huggingface/transformer` for a conditional generation.
 The [QLoRa](https://arxiv.org/abs/2305.14314) implementation from `huggingface/peft` library will allow us to finetune large pretrained Large Langauge Models (LLMS) e.g.  LLAMA 🦙 and Falcon, on relatively small GPUs in Google Colab Notebook or on your cluster.
 
-## Clustering and Visualization of MultiWOZ
-The Part 2 of the lab is self-contained in jupyter notebook, and deals with cluserting and visualization of MultiWoz data using pretrained language models, and simple unsupervised techniques. 
-**See the [notebook](Part_2_Cluster_and_Visualize_MultiWoz_Subset.ipynb)**
 
 **What will you learn?**
 - How to finetune large language model (LLM) using [QLoRa](https://huggingface.co/blog/4bit-transformers-bitsandbytes).💡 
