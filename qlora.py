@@ -772,7 +772,10 @@ def train(
     extra_args,
 ):
     args = argparse.Namespace(
-        **vars(model_args), **vars(data_args), **vars(training_args)
+        **vars(model_args),
+        **vars(data_args),
+        **vars(training_args),
+        **vars(generation_args),
     )
     set_seed(args.seed)
 

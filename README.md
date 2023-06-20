@@ -68,7 +68,9 @@ Feel free to fill in partial information, e.g., if you do not know your CUDA ver
 
 |GPU model |  CUDA   |  train [it/s]  | infer [it/s] |
 |----------|---------|----------------|--------------|
-|  waiting |  for    |    your        |  numbers     |
+|  GC-Tesla T4 |  12.0    |    -        |  -     |
+|  TODO |  12.0    |    2.43s/it        |  2.41s/it     |
+|NVIDIA GTX 1080 | 11.5 | 0:03:39.51 |0:00:00.04|
 
 </details>
 
