@@ -262,7 +262,7 @@ If you use the code or results from this tutorial, please cite the tutorial in t
 ```
 @article{oplatek2023qlora-multiwoz,
   title={Investigating Masked Language Model and Instruction finetuning of LLMs using QLoRa for Task-Oriented Dialogue Models},
-  author={Plátek, Ondřej and Kesiraju, Santosh and Schwarz, Petr},
+  author={Plátek, Ondřej and Kesiraju, Santosh and Schwarz, Petr and Dušek, Ondřej},
   publisher = {GitHub},
   journal = {GitHub repository},
   howpublished = {\url{https://github.com/keya-dialog/jsalt-dialogue-lab}},
