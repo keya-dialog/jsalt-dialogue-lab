@@ -241,7 +241,7 @@ If you have implemented a new feature, found a bug, or want to fix a typo, pleas
 Use the [black](https://github.com/psf/black) formatter to avoid merge conflicts in large PRs.
 
 In other cases, feel free to reach us too:<br/>
-[Ondřej Plátek](opla.cz), [(UFAL, Charles University, Prague)](https://ufal.mff.cuni.cz/ondrej-platek) <br/>
+[Ondřej Plátek](https://opla.cz), [(UFAL, Charles University, Prague)](https://ufal.mff.cuni.cz/ondrej-platek) <br/>
 [Santosh Kesiraju](https://www.fit.vut.cz/person/kesiraju/.cs), [(FIT, VUT, Brno)](https://www.fit.vut.cz/person/kesiraju/) <br/>
 [Petr Schwarz](https://www.fit.vut.cz/person/schwarzp/.en), [(FIT, VUT, Brno)](https://www.fit.vut.cz/person/schwarzp/) <br/>
 
